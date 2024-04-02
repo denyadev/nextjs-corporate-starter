@@ -427,6 +427,13 @@ export interface ApiOrganizationOrganization extends Schema.CollectionType {
           localized: false;
         };
       }>;
+    name: Attribute.String &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
+        };
+      }>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
