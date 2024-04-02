@@ -1,10 +1,12 @@
-import {fetchAPI} from "@/app/[lang]/utils/fetch-api";
-
-export async function getPageBySlug(slug: string, lang: string) {
-    const token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
-
-    const path = `/pages`;
-    const urlParamsObject = {filters: {slug}, locale: lang};
-    const options = {headers: {Authorization: `Bearer ${token}`}};
-    return await fetchAPI(path, urlParamsObject, options);
+export async function getPageBySlug(
+    organizationSlug: string,
+    pageSlug: string,
+    lang: string
+) {
+    const baseUrl = `http://localhost:1337`;
+    const url = `${baseUrl}/api/pages?filters[organization][slug][$eq]=${organizationSlug}&filters[url]=${pageSlug}&populate[template][populate]=*`;
+    console.log("Fetching URL:", url);
+    const response = await fetch(url);
+    const data = await response.json();
+    return data;
 }

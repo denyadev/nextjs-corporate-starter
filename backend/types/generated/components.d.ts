@@ -105,11 +105,20 @@ export interface ElementsPlan extends Schema.Component {
     isRecommended: Attribute.Boolean;
     price: Attribute.Decimal;
     pricePeriod: Attribute.String;
-    product_features: Attribute.Relation<
-      'elements.plan',
-      'oneToMany',
-      'api::product-feature.product-feature'
-    >;
+  };
+}
+
+export interface ElementsSpeaker extends Schema.Component {
+  collectionName: 'components_elements_speakers';
+  info: {
+    displayName: 'Speaker';
+    icon: 'user';
+  };
+  attributes: {
+    name: Attribute.String & Attribute.Required;
+    title: Attribute.String;
+    bio: Attribute.Text;
+    image: Attribute.Media;
   };
 }
 
@@ -125,25 +134,6 @@ export interface ElementsTestimonial extends Schema.Component {
     picture: Attribute.Media & Attribute.Required;
     text: Attribute.Text & Attribute.Required;
     authorName: Attribute.String & Attribute.Required;
-  };
-}
-
-export interface LayoutFooter extends Schema.Component {
-  collectionName: 'components_layout_footers';
-  info: {
-    displayName: 'Footer';
-    description: '';
-  };
-  attributes: {
-    footerLogo: Attribute.Component<'layout.logo'>;
-    menuLinks: Attribute.Component<'links.link', true>;
-    legalLinks: Attribute.Component<'links.link', true>;
-    socialLinks: Attribute.Component<'links.social-link', true>;
-    categories: Attribute.Relation<
-      'layout.footer',
-      'oneToMany',
-      'api::category.category'
-    >;
   };
 }
 
@@ -230,20 +220,6 @@ export interface LinksSocialLink extends Schema.Component {
     newTab: Attribute.Boolean & Attribute.DefaultTo<false>;
     text: Attribute.String & Attribute.Required;
     social: Attribute.Enumeration<['YOUTUBE', 'TWITTER', 'DISCORD', 'WEBSITE']>;
-  };
-}
-
-export interface MetaMetadata extends Schema.Component {
-  collectionName: 'components_meta_metadata';
-  info: {
-    name: 'Metadata';
-    displayName: 'Metadata';
-    icon: 'robot';
-    description: '';
-  };
-  attributes: {
-    metaTitle: Attribute.String & Attribute.Required;
-    metaDescription: Attribute.Text & Attribute.Required;
   };
 }
 
@@ -398,79 +374,66 @@ export interface SectionsTestimonialsGroup extends Schema.Component {
   };
 }
 
-export interface SharedMedia extends Schema.Component {
-  collectionName: 'components_shared_media';
+export interface SharedMetaSocial extends Schema.Component {
+  collectionName: 'components_shared_meta_socials';
   info: {
-    displayName: 'Media';
-    icon: 'file-video';
-    description: '';
+    displayName: 'metaSocial';
+    icon: 'project-diagram';
   };
   attributes: {
-    file: Attribute.Media;
-  };
-}
-
-export interface SharedQuote extends Schema.Component {
-  collectionName: 'components_shared_quotes';
-  info: {
-    displayName: 'Quote';
-    icon: 'indent';
-    description: '';
-  };
-  attributes: {
-    title: Attribute.String;
-    body: Attribute.Text & Attribute.Required;
-    author: Attribute.String;
-  };
-}
-
-export interface SharedRichText extends Schema.Component {
-  collectionName: 'components_shared_rich_texts';
-  info: {
-    displayName: 'Rich text';
-    icon: 'align-justify';
-    description: '';
-  };
-  attributes: {
-    body: Attribute.RichText;
+    socialNetwork: Attribute.Enumeration<['Facebook', 'Twitter']> &
+      Attribute.Required;
+    title: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        maxLength: 60;
+      }>;
+    description: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        maxLength: 65;
+      }>;
+    image: Attribute.Media;
   };
 }
 
 export interface SharedSeo extends Schema.Component {
   collectionName: 'components_shared_seos';
   info: {
-    name: 'Seo';
-    icon: 'allergies';
-    displayName: 'Seo';
-    description: '';
+    displayName: 'seo';
+    icon: 'search';
   };
   attributes: {
-    metaTitle: Attribute.String & Attribute.Required;
-    metaDescription: Attribute.Text & Attribute.Required;
-    shareImage: Attribute.Media;
+    metaTitle: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        maxLength: 60;
+      }>;
+    metaDescription: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        minLength: 50;
+        maxLength: 160;
+      }>;
+    metaImage: Attribute.Media;
+    metaSocial: Attribute.Component<'shared.meta-social', true>;
+    keywords: Attribute.Text;
+    metaRobots: Attribute.String;
+    structuredData: Attribute.JSON;
+    metaViewport: Attribute.String;
+    canonicalURL: Attribute.String;
   };
 }
 
-export interface SharedSlider extends Schema.Component {
-  collectionName: 'components_shared_sliders';
+export interface TemplateSpeaker extends Schema.Component {
+  collectionName: 'components_template_speakers';
   info: {
-    displayName: 'Slider';
-    icon: 'address-book';
+    displayName: 'Speakers';
+    icon: 'volumeUp';
     description: '';
   };
   attributes: {
-    files: Attribute.Media;
-  };
-}
-
-export interface SharedVideoEmbed extends Schema.Component {
-  collectionName: 'components_sections_video_embeds';
-  info: {
-    displayName: 'Video Embed';
-    description: '';
-  };
-  attributes: {
-    url: Attribute.String & Attribute.Required;
+    speaker: Attribute.Component<'elements.speaker', true>;
   };
 }
 
@@ -484,15 +447,14 @@ declare module '@strapi/types' {
       'elements.logos': ElementsLogos;
       'elements.notification-banner': ElementsNotificationBanner;
       'elements.plan': ElementsPlan;
+      'elements.speaker': ElementsSpeaker;
       'elements.testimonial': ElementsTestimonial;
-      'layout.footer': LayoutFooter;
       'layout.logo': LayoutLogo;
       'layout.navbar': LayoutNavbar;
       'links.button-link': LinksButtonLink;
       'links.button': LinksButton;
       'links.link': LinksLink;
       'links.social-link': LinksSocialLink;
-      'meta.metadata': MetaMetadata;
       'sections.bottom-actions': SectionsBottomActions;
       'sections.feature-columns-group': SectionsFeatureColumnsGroup;
       'sections.feature-rows-group': SectionsFeatureRowsGroup;
@@ -504,12 +466,9 @@ declare module '@strapi/types' {
       'sections.pricing': SectionsPricing;
       'sections.rich-text': SectionsRichText;
       'sections.testimonials-group': SectionsTestimonialsGroup;
-      'shared.media': SharedMedia;
-      'shared.quote': SharedQuote;
-      'shared.rich-text': SharedRichText;
+      'shared.meta-social': SharedMetaSocial;
       'shared.seo': SharedSeo;
-      'shared.slider': SharedSlider;
-      'shared.video-embed': SharedVideoEmbed;
+      'template.speaker': TemplateSpeaker;
     }
   }
 }

@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- *  page controller
+ * page controller
  */
 
 const { createCoreController } = require('@strapi/strapi').factories;
