@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_template_sponsors",
+  "info": {
+    "displayName": "Sponsors",
+    "icon": "heart"
+  },
+  "options": {},
+  "attributes": {
+    "sponsor": {
+      "type": "component",
+      "repeatable": true,
+      "component": "elements.sponsor"
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "collectionName": "components_elements_agenda_items",
+  "info": {
+    "displayName": "Agenda Item",
+    "icon": "calendar",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "start_time": {
+      "type": "time",
+      "required": true
+    },
+    "end_time": {
+      "type": "time"
+    },
+    "media": {
+      "allowedTypes": [
+        "files"
+      ],
+      "type": "media",
+      "multiple": true
+    },
+    "notes": {
+      "type": "blocks"
+    }
+  }
+}

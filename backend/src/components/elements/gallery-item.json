@@ -1,22 +1,12 @@
 {
-  "collectionName": "components_elements_speakers",
+  "collectionName": "components_elements_gallery_items",
   "info": {
-    "displayName": "Speaker",
-    "icon": "user",
+    "displayName": "Gallery Item",
+    "icon": "landscape",
     "description": ""
   },
   "options": {},
   "attributes": {
-    "name": {
-      "type": "string",
-      "required": true
-    },
-    "title": {
-      "type": "string"
-    },
-    "bio": {
-      "type": "text"
-    },
     "media": {
       "type": "media",
       "multiple": false,
@@ -27,6 +17,12 @@
         "videos",
         "audios"
       ]
+    },
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
     }
   }
 }

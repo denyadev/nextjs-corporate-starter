@@ -16,16 +16,6 @@
     }
   },
   "attributes": {
-    "name": {
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      },
-      "type": "string",
-      "required": true,
-      "unique": true
-    },
     "slug": {
       "pluginOptions": {
         "i18n": {
@@ -33,7 +23,6 @@
         }
       },
       "type": "uid",
-      "targetField": "name",
       "required": true
     },
     "logo": {
@@ -73,6 +62,38 @@
       "relation": "oneToMany",
       "target": "api::page.page",
       "mappedBy": "organization"
+    },
+    "primary_color": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "type": "string"
+    },
+    "accent_color": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "type": "string"
+    },
+    "border_radius": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "type": "string"
+    },
+    "password": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "type": "string"
     }
   }
 }

@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_template_documents",
+  "info": {
+    "displayName": "Documents",
+    "icon": "filePdf"
+  },
+  "options": {},
+  "attributes": {
+    "url": {
+      "type": "string"
+    }
+  }
+}

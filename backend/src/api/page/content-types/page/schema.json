@@ -55,8 +55,36 @@
       },
       "type": "dynamiczone",
       "components": [
-        "template.speaker"
+        "template.speaker",
+        "template.agenda",
+        "template.sponsors",
+        "template.documents",
+        "template.gallery"
       ]
+    },
+    "tab_name": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string",
+      "required": true
+    },
+    "icon": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "type": "enumeration",
+      "enum": [
+        "Calendar",
+        "Speaker",
+        "Sponsor",
+        "File"
+      ],
+      "required": true
     }
   }
 }
