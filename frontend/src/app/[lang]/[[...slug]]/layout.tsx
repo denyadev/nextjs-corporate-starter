@@ -2,6 +2,8 @@ import Banner from "../components/Banner";
 import Header from "../components/Header";
 import ThemeProvider from "@/context/ThemeProvider";
 
+export const revalidate = 0;
+
 export default async function MainLayout({
     children,
     params,
