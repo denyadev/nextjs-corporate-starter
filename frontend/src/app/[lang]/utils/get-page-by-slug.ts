@@ -1,3 +1,5 @@
+export const revalidate = 0;
+
 export async function getPageBySlug(
     organizationSlug: string,
     pageSlug: string,
