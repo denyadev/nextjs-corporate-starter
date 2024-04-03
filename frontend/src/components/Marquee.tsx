@@ -1,5 +1,5 @@
 "use client";
-import { getStrapiURL } from "@/utils/api-helpers";
+import { getStrapiMedia } from "@/utils/api-helpers";
 import Image from "next/image";
 import MarqueeComponent from "react-fast-marquee";
 
@@ -28,7 +28,9 @@ export default function Marquee({ marquee }: { marquee: any }) {
                 return (
                   <Image
                     key={`image-${index}-${imageIndex}`}
-                    src={getStrapiURL(imageItem.media.data.attributes.url)}
+                    src={
+                      getStrapiMedia(imageItem.media.data.attributes.url) || "/"
+                    }
                     width={imageItem.media.data.attributes.width}
                     height={imageItem.media.data.attributes.height}
                     alt={`Marquee image ${imageIndex + 1}`}
