@@ -21,14 +21,15 @@ export async function fetchAPI(
     const requestUrl = `${getStrapiURL(
       `/api${path}${queryString ? `?${queryString}` : ""}`
     )}`;
-
+    console.log("URL:", requestUrl);
     // Trigger API call
     const response = await fetch(requestUrl, mergedOptions);
     const data = await response.json();
     return data;
-    
   } catch (error) {
     console.error(error);
-    throw new Error(`Please check if your server is running and you set all the required tokens.`);
+    throw new Error(
+      `Please check if your server is running and you set all the required tokens.`
+    );
   }
 }
