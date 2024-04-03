@@ -2,7 +2,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import Image from "next/image";
 
 export default function SpeakersTemplate({ content }: { content: any }) {
-  console.log(content);
+  // console.log(content);
   return (
     <div>
       <div className="my-4">
@@ -20,7 +20,7 @@ export default function SpeakersTemplate({ content }: { content: any }) {
               width={person.media.data.attributes.width}
               height={person.media.data.attributes.height}
               alt={person.name}
-              className="w-full object-cover transition-transform group-hover:scale-110"
+              className="object-cover w-full h-full rounded-lg overflow-hidden transition-transform group-hover:scale-110"
               style={{ height: "100%" }}
             />
             <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-70 p-4 transition-opacity duration-300 group-hover:bg-opacity-90">

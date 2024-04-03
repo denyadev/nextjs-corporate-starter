@@ -1,12 +1,12 @@
-import { templateRenderer } from "@/app/[lang]/utils/template-renderer";
-import { getPageBySlug } from "@/app/[lang]/utils/get-page-by-slug";
+import { templateRenderer } from "@/utils/template-renderer";
+import { getPageBySlug } from "@/utils/get-page-by-slug";
 
 export default async function PageRoute({
   params,
 }: {
   params: { lang: string; slug?: string[] };
 }) {
-  console.log("Received params", params);
+  // console.log("Received params", params);
 
   const { lang, slug } = params;
 

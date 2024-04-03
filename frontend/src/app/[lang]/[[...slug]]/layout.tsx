@@ -1,5 +1,5 @@
-import Banner from "../components/Banner";
-import Header from "../components/Header";
+import Banner from "../../../components/Banner";
+import Header from "../../../components/Header";
 import ThemeProvider from "@/context/ThemeProvider";
 import initTranslations from "@/app/i18n";
 import TranslationsProvider from "@/context/TranslationsProvider";

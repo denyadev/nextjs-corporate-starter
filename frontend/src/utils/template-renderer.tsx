@@ -6,7 +6,7 @@ import SponsorsTemplate from "../components/templates/SponsorsTemplate";
 
 // In your utils/template-renderer.js or .ts
 export const templateRenderer = (template: any) => {
-  console.log(template.template[0].__component);
+  // console.log(template.template[0].__component);
   switch (template.template[0].__component) {
     case "template.speaker":
       return <SpeakersTemplate content={template} />;

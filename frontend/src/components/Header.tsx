@@ -32,7 +32,7 @@ import { DashboardIcon, HamburgerMenuIcon } from "@radix-ui/react-icons";
 import { usePathname, useRouter } from "next/navigation";
 import { Separator } from "@/components/ui/separator";
 import { useTranslation } from "react-i18next";
-import i18nConfig from "../../../../i18nConfig";
+import i18nConfig from "../../i18nConfig";
 
 type IconMap = {
   [key: string]: JSX.Element;
@@ -74,17 +74,13 @@ export default function Header({
     const locales = ["en", "fr"]; // List of supported locales
     const pathSegments = path.split("/").filter(Boolean); // Split the pathname into segments and remove empty strings
 
-    // If the first segment is a locale and the second segment is a dataset, we remove both
-    if (
-      pathSegments.length >= 2 &&
-      locales.includes(pathSegments[0]) &&
-      !locales.includes(pathSegments[1])
-    ) {
+    // If the first segment is a locale, we remove it along with the dataset (assuming the second segment is the dataset)
+    if (locales.includes(pathSegments[0])) {
       return `/${pathSegments.slice(2).join("/")}`;
     }
 
-    // If the first segment is not a locale or the second segment is a locale, we assume the path is already normalized
-    return `/${pathSegments.join("/")}`;
+    // If the first segment is not a locale, we assume it's the dataset and remove it
+    return `/${pathSegments.slice(1).join("/")}`;
   };
 
   const toggleLanguage = (locale: string) => {
@@ -115,13 +111,15 @@ export default function Header({
       <div className="flex justify-between items-center w-full container mx-auto px-4 lg:px-0">
         <div>
           {logo?.data?.attributes?.url ? (
-            <Image
-              src={logo?.data?.attributes?.url}
-              alt="logo"
-              width={logo?.data?.attributes?.width}
-              height={logo?.data?.attributes?.height}
-              className="h-12 w-full object-contain"
-            />
+            <Link href={`/${slug}`} legacyBehavior passHref>
+              <Image
+                src={logo?.data?.attributes?.url}
+                alt="logo"
+                width={logo?.data?.attributes?.width}
+                height={logo?.data?.attributes?.height}
+                className="h-12 w-full object-contain cursor-pointer"
+              />
+            </Link>
           ) : (
             <div>Logo Goes Here</div>
           )}
@@ -151,13 +149,15 @@ export default function Header({
               <SheetTitle>
                 <div className="flex py-4">
                   {logo?.data?.attributes?.url ? (
-                    <Image
-                      src={logo?.data?.attributes?.url}
-                      alt="logo"
-                      width={logo?.data?.attributes?.width}
-                      height={logo?.data?.attributes?.height}
-                      className="h-12 w-full object-contain"
-                    />
+                    <Link href={`/${slug}`} legacyBehavior passHref>
+                      <Image
+                        src={logo?.data?.attributes?.url}
+                        alt="logo"
+                        width={logo?.data?.attributes?.width}
+                        height={logo?.data?.attributes?.height}
+                        className="h-12 w-full object-contain cursor-pointer"
+                      />
+                    </Link>
                   ) : (
                     <div>Logo Goes Here</div>
                   )}
@@ -179,7 +179,7 @@ export default function Header({
                           <NavigationMenuLink
                             className={`${navigationMenuTriggerStyle()} border-l-2 rounded-none py-4 h-full w-full ${
                               normalizePathname(pathname) ===
-                              normalizePathname(tab.attributes.url)
+                              `/${tab.attributes.url}`
                                 ? "border-themePrimary bg-accent"
                                 : ""
                             }`}
@@ -230,8 +230,7 @@ export default function Header({
                 >
                   <NavigationMenuLink
                     className={`${navigationMenuTriggerStyle()} border-b-4 rounded-none lg:py-6 h-full w-full ${
-                      normalizePathname(pathname) ===
-                      normalizePathname(tab.attributes.url)
+                      normalizePathname(pathname) === `/${tab.attributes.url}`
                         ? "border-themePrimary bg-accent"
                         : ""
                     }`}
