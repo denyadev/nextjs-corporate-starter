@@ -1,5 +1,5 @@
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { getStrapiMedia, getStrapiURL } from "@/utils/api-helpers";
+import { getStrapiMedia } from "@/utils/api-helpers";
 import Image from "next/image";
 
 export default function SpeakersTemplate({ content }: { content: any }) {

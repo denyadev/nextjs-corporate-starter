@@ -33,7 +33,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { Separator } from "@/components/ui/separator";
 import { useTranslation } from "react-i18next";
 import i18nConfig from "../../i18nConfig";
-import { getStrapiURL } from "@/utils/api-helpers";
+import { getStrapiMedia } from "@/utils/api-helpers";
 
 type IconMap = {
   [key: string]: JSX.Element;
@@ -107,6 +107,8 @@ export default function Header({
     router.refresh();
   };
 
+  const logoUrl = getStrapiMedia(logo?.data?.attributes?.url) || "";
+
   return (
     <header className="flex bg-white w-full h-full shadow-sm sticky top-0 z-50">
       <div className="flex justify-between items-center w-full container mx-auto px-4 lg:px-0">
@@ -114,7 +116,7 @@ export default function Header({
           {logo?.data?.attributes?.url ? (
             <Link href={`/${slug}`} legacyBehavior passHref>
               <Image
-                src={getStrapiURL(logo?.data?.attributes?.url)}
+                src={logoUrl}
                 alt="logo"
                 width={logo?.data?.attributes?.width}
                 height={logo?.data?.attributes?.height}
@@ -152,7 +154,7 @@ export default function Header({
                   {logo?.data?.attributes?.url ? (
                     <Link href={`/${slug}`} legacyBehavior passHref>
                       <Image
-                        src={getStrapiURL(logo?.data?.attributes?.url)}
+                        src={logoUrl}
                         alt="logo"
                         width={logo?.data?.attributes?.width}
                         height={logo?.data?.attributes?.height}

@@ -1,5 +1,5 @@
 "use client";
-import { getStrapiURL } from "@/utils/api-helpers";
+import { getStrapiMedia } from "@/utils/api-helpers";
 import Image from "next/image";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 
@@ -28,7 +28,7 @@ function GalleryItem({ image }: { image: any }) {
   return (
     <div className="relative group w-full hover:cursor-pointer">
       <Image
-        src={getStrapiURL(image?.media?.data?.attributes?.url)}
+        src={getStrapiMedia(image?.media?.data?.attributes?.url) || "/"}
         width={image?.media?.data?.attributes?.width}
         height={image?.media?.data?.attributes?.height}
         alt={image?.name || "Gallery Image"}

@@ -1,4 +1,4 @@
-import { getStrapiURL } from "@/utils/api-helpers";
+import { getStrapiMedia } from "@/utils/api-helpers";
 import Image from "next/image";
 
 export default function SponsorsTemplate({ content }: { content: any }) {
@@ -16,7 +16,7 @@ export default function SponsorsTemplate({ content }: { content: any }) {
         {content.template[0].sponsor.map((person: any, index: number) => (
           <div className="relative rounded-lg overflow-hidden shadow-lg group cursor-pointer">
             <Image
-              src={getStrapiURL(person.media.data.attributes.url)}
+              src={getStrapiMedia(person.media.data.attributes.url) || "/"}
               width={person.media.data.attributes.width}
               height={person.media.data.attributes.height}
               alt={person.name}
