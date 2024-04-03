@@ -40,12 +40,6 @@
       },
       "type": "string"
     },
-    "organization": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::organization.organization",
-      "inversedBy": "pages"
-    },
     "template": {
       "pluginOptions": {
         "i18n": {
@@ -84,6 +78,12 @@
         "File"
       ],
       "required": true
+    },
+    "organization": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::organization.organization",
+      "inversedBy": "pages"
     }
   }
 }

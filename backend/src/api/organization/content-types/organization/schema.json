@@ -57,12 +57,6 @@
         }
       }
     },
-    "pages": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::page.page",
-      "mappedBy": "organization"
-    },
     "primary_color": {
       "pluginOptions": {
         "i18n": {
@@ -103,6 +97,12 @@
       },
       "type": "string",
       "required": true
+    },
+    "pages": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::page.page",
+      "mappedBy": "organization"
     }
   }
 }

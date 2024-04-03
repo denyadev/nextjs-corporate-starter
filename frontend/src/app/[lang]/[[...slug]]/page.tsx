@@ -19,7 +19,6 @@ export default async function PageRoute({
   const pageSlug = slug[1];
 
   const data = await getPageBySlug(organizationSlug, pageSlug, lang);
-  console.log("Data received", data);
 
   if (!data || !data.data || data.data.length === 0) {
     return <div>Page not found.</div>;
@@ -30,8 +29,6 @@ export default async function PageRoute({
   if (!page || !page.template || page.template.length === 0) {
     return <div>No content available</div>;
   }
-
-  //   console.log(page);
 
   return <div>{templateRenderer(page)}</div>;
 }

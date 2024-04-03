@@ -398,11 +398,6 @@ export interface ApiOrganizationOrganization extends Schema.CollectionType {
           localized: false;
         };
       }>;
-    pages: Attribute.Relation<
-      'api::organization.organization',
-      'oneToMany',
-      'api::page.page'
-    >;
     primary_color: Attribute.String &
       Attribute.SetPluginOptions<{
         i18n: {
@@ -434,6 +429,11 @@ export interface ApiOrganizationOrganization extends Schema.CollectionType {
           localized: false;
         };
       }>;
+    pages: Attribute.Relation<
+      'api::organization.organization',
+      'oneToMany',
+      'api::page.page'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -493,11 +493,6 @@ export interface ApiPagePage extends Schema.CollectionType {
           localized: true;
         };
       }>;
-    organization: Attribute.Relation<
-      'api::page.page',
-      'manyToOne',
-      'api::organization.organization'
-    >;
     template: Attribute.DynamicZone<
       [
         'template.speaker',
@@ -526,6 +521,11 @@ export interface ApiPagePage extends Schema.CollectionType {
           localized: false;
         };
       }>;
+    organization: Attribute.Relation<
+      'api::page.page',
+      'manyToOne',
+      'api::organization.organization'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

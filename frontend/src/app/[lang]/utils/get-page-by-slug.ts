@@ -1,11 +1,9 @@
 import { fetchAPI } from "./fetch-api";
 
-export const revalidate = 0;
-
 export async function getPageBySlug(
   organizationSlug: string,
   pageSlug: string,
-  lang: string
+  requestedLocale: string
 ) {
   let template = "";
   switch (pageSlug) {
@@ -32,8 +30,12 @@ export async function getPageBySlug(
       organization: { slug: { $eq: organizationSlug } },
       url: pageSlug,
     },
-    populate: [`template.${template}`, `template.${template}.media`],
-    locale: lang,
+    populate: [
+      `template.${template}`,
+      `template.${template}.media`,
+      "localizations",
+    ],
+    locale: "en", // Always fetch the English version first, which includes localizations
   };
 
   const options = {
@@ -42,6 +44,30 @@ export async function getPageBySlug(
     },
   };
 
-  // Use fetchAPI to make the request
-  return await fetchAPI(path, urlParamsObject, options);
+  const response = await fetchAPI(path, urlParamsObject, options);
+
+  if (!response || !response.data || response.data.length === 0) {
+    throw new Error("No page data found.");
+  }
+
+  const pageData = response.data[0];
+
+  if (
+    requestedLocale !== "en" &&
+    pageData.attributes.localizations.data.length > 0
+  ) {
+    const localizationFound = pageData.attributes.localizations.data.find(
+      (loc: any) => loc.attributes.locale === requestedLocale
+    );
+
+    if (localizationFound) {
+      Object.assign(pageData.attributes, localizationFound.attributes);
+    }
+  }
+
+  // Remove the 'localizations' field to simplify the returned object
+  delete pageData.attributes.localizations;
+
+  // Return the response in its original structure but with updated attributes
+  return response;
 }

@@ -1,5 +1,4 @@
 export default function EmbedTemplate({ content }: { content: any }) {
-  console.log("DocumentsTemplate content", content);
   return (
     <div>
       <div className="my-4">
