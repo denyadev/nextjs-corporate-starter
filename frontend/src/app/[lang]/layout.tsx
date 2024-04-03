@@ -1,6 +1,12 @@
 import "./globals.css";
 import { i18n } from "../../../i18n-config";
 import { GeistSans } from "geist/font/sans";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "DOTSapp",
+  description: "Convention App",
+};
 
 export default async function RootLayout({
   children,

@@ -487,8 +487,7 @@ export interface ApiPagePage extends Schema.CollectionType {
           localized: true;
         };
       }>;
-    url: Attribute.UID &
-      Attribute.Required &
+    url: Attribute.String &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
