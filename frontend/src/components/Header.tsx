@@ -33,6 +33,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { Separator } from "@/components/ui/separator";
 import { useTranslation } from "react-i18next";
 import i18nConfig from "../../i18nConfig";
+import { getStrapiURL } from "@/utils/api-helpers";
 
 type IconMap = {
   [key: string]: JSX.Element;
@@ -66,7 +67,7 @@ export default function Header({
   slug: string;
 }) {
   const pathname = usePathname() || "/";
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
   const currentLocale = i18n.language;
   const router = useRouter();
 
@@ -113,7 +114,7 @@ export default function Header({
           {logo?.data?.attributes?.url ? (
             <Link href={`/${slug}`} legacyBehavior passHref>
               <Image
-                src={logo?.data?.attributes?.url}
+                src={getStrapiURL(logo?.data?.attributes?.url)}
                 alt="logo"
                 width={logo?.data?.attributes?.width}
                 height={logo?.data?.attributes?.height}
@@ -151,7 +152,7 @@ export default function Header({
                   {logo?.data?.attributes?.url ? (
                     <Link href={`/${slug}`} legacyBehavior passHref>
                       <Image
-                        src={logo?.data?.attributes?.url}
+                        src={getStrapiURL(logo?.data?.attributes?.url)}
                         alt="logo"
                         width={logo?.data?.attributes?.width}
                         height={logo?.data?.attributes?.height}
@@ -197,7 +198,10 @@ export default function Header({
                       </NavigationMenuItem>
                     ))}
                     <Separator className="my-1" />
-                    <NavigationMenuItem key={"language"} className="w-full">
+                    <NavigationMenuItem
+                      key={"language"}
+                      className="flex w-full"
+                    >
                       <NavigationMenuLink
                         className={`${navigationMenuTriggerStyle()}  border-l-2 rounded-none py-4 h-full w-full bg-accent cursor-pointer`}
                         onClick={() =>
@@ -206,7 +210,7 @@ export default function Header({
                       >
                         <div className="flex items-center gap-1 w-full">
                           <Globe className="w-5 h-5" />
-                          <span className="font-medium text-xs">
+                          <span className="font-medium text-xs ">
                             {currentLocale.toUpperCase()}
                           </span>
                         </div>
@@ -235,7 +239,7 @@ export default function Header({
                         : ""
                     }`}
                   >
-                    <div className="flex flex-col items-center gap-1 w-16">
+                    <div className="flex flex-col items-center gap-1 w-24">
                       {ShowIcon(tab.attributes.icon)}
                       <span className="font-medium text-xs text-center">
                         {tab.attributes.tab_name}
@@ -255,7 +259,7 @@ export default function Header({
               <NavigationMenuLink
                 className={`${navigationMenuTriggerStyle()} border-b-4 rounded-none lg:py-6 h-full w-full bg-accent cursor-pointer`}
               >
-                <div className="flex flex-col items-center gap-1 w-16">
+                <div className="flex flex-col items-center gap-1 w-24">
                   <Globe className="w-5 h-5" />
                   <span className="font-medium text-xs text-center">
                     {currentLocale.toUpperCase()}

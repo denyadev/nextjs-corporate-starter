@@ -3,6 +3,7 @@ import Header from "../../../components/Header";
 import ThemeProvider from "@/context/ThemeProvider";
 import initTranslations from "@/app/i18n";
 import TranslationsProvider from "@/context/TranslationsProvider";
+import Marquee from "@/components/Marquee";
 
 export const revalidate = 0;
 const i18nNamespaces = ["default"];
@@ -19,15 +20,16 @@ export default async function MainLayout({
   if (!slug || !slug[0]) {
     return null;
   }
+  // https://pretty-harmony-b2c4339f8a.strapiapp.com/
+  const url = `http://localhost:1337/api/organizations?filters[slug][$eq]=${slug[0]}&populate=logo,pages,banner,localizations,marquee.marquee_text,marquee.marquee_image,marquee.marquee_image.media&locale=${lang}`;
+  const response = await fetch(url);
 
-  const response = await fetch(
-    `https://pretty-harmony-b2c4339f8a.strapiapp.com/api/organizations?filters[slug][$eq]=${slug[0]}&populate=*`
-  );
   const data = await response.json();
   console.log(data.data[0].attributes);
   const bannerData = data?.data[0]?.attributes?.banner;
   const logoData = data?.data[0]?.attributes?.logo;
   const pagesData = data?.data[0]?.attributes?.pages?.data || [];
+  const marqueeData = data?.data[0]?.attributes?.marquee;
   const themeData = {
     primary: data?.data[0]?.attributes?.primary_color,
     secondary: data?.data[0]?.attributes?.accent_color,
@@ -44,6 +46,7 @@ export default async function MainLayout({
       >
         <ThemeProvider theme={themeData}>
           <Banner banner={bannerData} />
+          <Marquee marquee={marqueeData} />
           <Header logo={logoData} slug={slug[0]} tabs={pagesData} />
           <div className="container mx-auto px-4 lg:px-0">{children}</div>
         </ThemeProvider>

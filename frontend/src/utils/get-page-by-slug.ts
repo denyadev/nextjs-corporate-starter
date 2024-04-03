@@ -51,6 +51,7 @@ export async function getPageBySlug(
 
   // Fetch the English page data
   const enResponse = await fetchAPI(path, urlParamsObject, options);
+  // console.log("English response:", enResponse);
 
   if (!enResponse || !enResponse.data || enResponse.data.length === 0) {
     throw new Error("No English page data found.");
