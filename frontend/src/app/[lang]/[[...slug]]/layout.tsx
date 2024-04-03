@@ -24,6 +24,7 @@ export default async function MainLayout({
     `https://pretty-harmony-b2c4339f8a.strapiapp.com/api/organizations?filters[slug][$eq]=${slug[0]}&populate=*`
   );
   const data = await response.json();
+  console.log(data.data[0].attributes);
   const bannerData = data?.data[0]?.attributes?.banner;
   const logoData = data?.data[0]?.attributes?.logo;
   const pagesData = data?.data[0]?.attributes?.pages?.data || [];

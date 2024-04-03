@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_elements_marquee_texts",
+  "info": {
+    "displayName": "Marquee Text",
+    "icon": "strikeThrough"
+  },
+  "options": {},
+  "attributes": {
+    "text": {
+      "type": "string"
+    }
+  }
+}

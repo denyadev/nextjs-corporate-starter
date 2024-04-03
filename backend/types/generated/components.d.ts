@@ -30,6 +30,28 @@ export interface ElementsGalleryItem extends Schema.Component {
   };
 }
 
+export interface ElementsMarqueeImage extends Schema.Component {
+  collectionName: 'components_elements_marquee_images';
+  info: {
+    displayName: 'Marquee Image';
+    icon: 'picture';
+  };
+  attributes: {
+    media: Attribute.Media;
+  };
+}
+
+export interface ElementsMarqueeText extends Schema.Component {
+  collectionName: 'components_elements_marquee_texts';
+  info: {
+    displayName: 'Marquee Text';
+    icon: 'strikeThrough';
+  };
+  attributes: {
+    text: Attribute.String;
+  };
+}
+
 export interface ElementsSpeaker extends Schema.Component {
   collectionName: 'components_elements_speakers';
   info: {
@@ -94,6 +116,18 @@ export interface TemplateGallery extends Schema.Component {
   };
 }
 
+export interface TemplateMarquee extends Schema.Component {
+  collectionName: 'components_template_marquees';
+  info: {
+    displayName: 'Marquee';
+    icon: 'landscape';
+  };
+  attributes: {
+    marquee_text: Attribute.Component<'elements.marquee-text', true>;
+    marquee_image: Attribute.Component<'elements.marquee-image', true>;
+  };
+}
+
 export interface TemplateSpeaker extends Schema.Component {
   collectionName: 'components_template_speakers';
   info: {
@@ -122,11 +156,14 @@ declare module '@strapi/types' {
     export interface Components {
       'elements.agenda-item': ElementsAgendaItem;
       'elements.gallery-item': ElementsGalleryItem;
+      'elements.marquee-image': ElementsMarqueeImage;
+      'elements.marquee-text': ElementsMarqueeText;
       'elements.speaker': ElementsSpeaker;
       'elements.sponsor': ElementsSponsor;
       'template.agenda': TemplateAgenda;
       'template.documents': TemplateDocuments;
       'template.gallery': TemplateGallery;
+      'template.marquee': TemplateMarquee;
       'template.speaker': TemplateSpeaker;
       'template.sponsors': TemplateSponsors;
     }

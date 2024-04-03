@@ -103,6 +103,17 @@
       "relation": "oneToMany",
       "target": "api::page.page",
       "mappedBy": "organization"
+    },
+    "marquee": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "dynamiczone",
+      "components": [
+        "template.marquee"
+      ]
     }
   }
 }
