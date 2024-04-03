@@ -10,6 +10,9 @@ export default function SponsorsTemplate({ content }: { content: any }) {
         <h2 className="text-muted-foreground">{content.subheading}</h2>
       </div>
       <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-4">
+        {content.template[0].sponsor.length === 0 && (
+          <div>Please upload some content!</div>
+        )}
         {content.template[0].sponsor.map((person: any, index: number) => (
           <div className="relative rounded-lg overflow-hidden shadow-lg group cursor-pointer">
             <Image

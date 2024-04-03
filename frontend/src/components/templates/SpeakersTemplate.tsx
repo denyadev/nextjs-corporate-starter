@@ -3,8 +3,6 @@ import { getStrapiURL } from "@/utils/api-helpers";
 import Image from "next/image";
 
 export default function SpeakersTemplate({ content }: { content: any }) {
-  // console.log(content);
-
   return (
     <div>
       <div className="my-4">

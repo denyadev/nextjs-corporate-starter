@@ -10,6 +10,9 @@ export default function GalleryTemplate({ content }: { content: any }) {
         <h1 className="heading">{content.heading}</h1>
         <h2 className="text-muted-foreground">{content.subheading}</h2>
       </div>
+      {content.template[0].gallery.length === 0 && (
+        <div>Please upload some content!</div>
+      )}
       <ResponsiveMasonry columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}>
         <Masonry columnsCount={3} gutter="10px">
           {content.template[0].gallery.map((image: any, index: number) => (

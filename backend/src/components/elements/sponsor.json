@@ -2,7 +2,8 @@
   "collectionName": "components_elements_sponsors",
   "info": {
     "displayName": "Sponsor",
-    "icon": "heart"
+    "icon": "heart",
+    "description": ""
   },
   "options": {},
   "attributes": {
@@ -14,14 +15,15 @@
       "type": "text"
     },
     "media": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
     }
   }
 }

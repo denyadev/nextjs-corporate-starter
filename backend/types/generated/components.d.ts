@@ -24,7 +24,7 @@ export interface ElementsGalleryItem extends Schema.Component {
     description: '';
   };
   attributes: {
-    media: Attribute.Media;
+    media: Attribute.Media & Attribute.Required;
     name: Attribute.String;
     description: Attribute.String;
   };
@@ -63,7 +63,7 @@ export interface ElementsSpeaker extends Schema.Component {
     name: Attribute.String & Attribute.Required;
     title: Attribute.String;
     bio: Attribute.Text;
-    media: Attribute.Media;
+    media: Attribute.Media & Attribute.Required;
   };
 }
 
@@ -72,11 +72,12 @@ export interface ElementsSponsor extends Schema.Component {
   info: {
     displayName: 'Sponsor';
     icon: 'heart';
+    description: '';
   };
   attributes: {
     name: Attribute.String & Attribute.Required;
     description: Attribute.Text;
-    media: Attribute.Media;
+    media: Attribute.Media & Attribute.Required;
   };
 }
 
