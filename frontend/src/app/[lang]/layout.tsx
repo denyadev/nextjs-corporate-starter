@@ -1,7 +1,8 @@
 import "./globals.css";
-import { i18n } from "../../../i18n-config";
+
 import { GeistSans } from "geist/font/sans";
 import type { Metadata } from "next";
+import i18nConfig from "../../../i18nConfig";
 
 export const metadata: Metadata = {
   title: "DOTSapp",
@@ -23,5 +24,5 @@ export default async function RootLayout({
 }
 
 export async function generateStaticParams() {
-  return i18n.locales.map((locale) => ({ lang: locale }));
+  return i18nConfig.locales.map((locale) => ({ lang: locale }));
 }

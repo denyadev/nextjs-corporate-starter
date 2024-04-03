@@ -1,22 +1,27 @@
 import Banner from "../components/Banner";
 import Header from "../components/Header";
 import ThemeProvider from "@/context/ThemeProvider";
+import initTranslations from "@/app/i18n";
+import TranslationsProvider from "@/context/TranslationsProvider";
 
 export const revalidate = 0;
+const i18nNamespaces = ["default"];
 
 export default async function MainLayout({
   children,
-  params,
+  params: { lang, slug },
 }: {
   children: React.ReactNode;
   params: { lang: string; slug?: string[] };
 }) {
-  if (!params.slug || !params.slug[0]) {
+  const { resources } = await initTranslations(lang, i18nNamespaces);
+
+  if (!slug || !slug[0]) {
     return null;
   }
 
   const response = await fetch(
-    `https://pretty-harmony-b2c4339f8a.strapiapp.com/api/organizations?filters[slug][$eq]=${params.slug[0]}&populate=*`
+    `https://pretty-harmony-b2c4339f8a.strapiapp.com/api/organizations?filters[slug][$eq]=${slug[0]}&populate=*`
   );
   const data = await response.json();
   const bannerData = data?.data[0]?.attributes?.banner;
@@ -31,11 +36,17 @@ export default async function MainLayout({
 
   return (
     <section>
-      <ThemeProvider theme={themeData}>
-        <Banner banner={bannerData} />
-        <Header logo={logoData} slug={params.slug[0]} tabs={pagesData} />
-        <div className="container mx-auto px-4 lg:px-0">{children}</div>
-      </ThemeProvider>
+      <TranslationsProvider
+        namespaces={i18nNamespaces}
+        locale={lang}
+        resources={resources}
+      >
+        <ThemeProvider theme={themeData}>
+          <Banner banner={bannerData} />
+          <Header logo={logoData} slug={slug[0]} tabs={pagesData} />
+          <div className="container mx-auto px-4 lg:px-0">{children}</div>
+        </ThemeProvider>
+      </TranslationsProvider>
     </section>
   );
 }
