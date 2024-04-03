@@ -379,7 +379,7 @@ export interface ApiOrganizationOrganization extends Schema.CollectionType {
     };
   };
   attributes: {
-    slug: Attribute.UID &
+    slug: Attribute.String &
       Attribute.Required &
       Attribute.SetPluginOptions<{
         i18n: {
