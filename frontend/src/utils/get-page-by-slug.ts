@@ -35,11 +35,7 @@ export async function getPageBySlug(
       `template.${template}.media`,
       "localizations",
     ],
-    locale: "en", // Always fetch the English version first, which includes localizations
-  };
-
-  const urlLocalizedParamsObject = {
-    populate: [`template.${template}`, `template.${template}.media`],
+    locale: requestedLocale,
   };
 
   const options = {
@@ -47,38 +43,12 @@ export async function getPageBySlug(
       Authorization: `Bearer ${token}`,
     },
   };
-  // console.log("URL params:", urlParamsObject);
 
-  // Fetch the English page data
-  const enResponse = await fetchAPI(path, urlParamsObject, options);
-  // console.log("English response:", enResponse);
+  const response = await fetchAPI(path, urlParamsObject, options);
 
-  if (!enResponse || !enResponse.data || enResponse.data.length === 0) {
-    throw new Error("No English page data found.");
+  if (!response || !response.data || response.data.length === 0) {
+    throw new Error("No page data found.");
   }
 
-  let pageData = enResponse.data[0]; // default to English page data
-
-  if (requestedLocale !== "en") {
-    // Find the localized page ID
-    const localizationId = pageData.attributes.localizations.data.find(
-      (loc: any) => loc.attributes.locale === requestedLocale
-    )?.id;
-
-    if (localizationId) {
-      // Fetch the localized page data by ID
-      const localizedResponse = await fetchAPI(
-        `${path}/${localizationId}`,
-        urlLocalizedParamsObject,
-        options
-      );
-      if (localizedResponse && localizedResponse.data) {
-        pageData = localizedResponse.data;
-      }
-    }
-  }
-  // console.log("Page data:", pageData);
-
-  // Return the full response object, replacing the data part with the localized page data
-  return { ...enResponse, data: [pageData] }; // Ensure the data is in the same array format as the original response
+  return response;
 }

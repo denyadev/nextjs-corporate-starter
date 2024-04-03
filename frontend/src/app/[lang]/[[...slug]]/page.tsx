@@ -35,5 +35,7 @@ export default async function PageRoute({
     return <div>No content available</div>;
   }
 
+  console.log(page);
+
   return <div>{templateRenderer(page)}</div>;
 }

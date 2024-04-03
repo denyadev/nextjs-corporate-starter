@@ -4,6 +4,7 @@ import ThemeProvider from "@/context/ThemeProvider";
 import initTranslations from "@/app/i18n";
 import TranslationsProvider from "@/context/TranslationsProvider";
 import Marquee from "@/components/Marquee";
+import { getStrapiURL } from "@/utils/api-helpers";
 
 export const revalidate = 0;
 const i18nNamespaces = ["default"];
@@ -20,8 +21,10 @@ export default async function MainLayout({
   if (!slug || !slug[0]) {
     return null;
   }
-  // https://pretty-harmony-b2c4339f8a.strapiapp.com/
-  const url = `http://localhost:1337/api/organizations?filters[slug][$eq]=${slug[0]}&populate=logo,pages,banner,localizations,marquee.marquee_text,marquee.marquee_image,marquee.marquee_image.media&locale=${lang}`;
+
+  const url = `${getStrapiURL(
+    `/api/organizations?filters[slug][$eq]=${slug[0]}&populate=logo,pages,banner,localizations,marquee.marquee_text,marquee.marquee_image,marquee.marquee_image.media&locale=${lang}`
+  )}`;
   const response = await fetch(url);
 
   const data = await response.json();
