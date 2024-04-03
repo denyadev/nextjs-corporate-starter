@@ -1,5 +1,5 @@
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { getStrapiURL } from "@/utils/api-helpers";
+import { getStrapiMedia, getStrapiURL } from "@/utils/api-helpers";
 import Image from "next/image";
 
 export default function SpeakersTemplate({ content }: { content: any }) {
@@ -16,7 +16,7 @@ export default function SpeakersTemplate({ content }: { content: any }) {
             className="relative rounded-lg overflow-hidden shadow-lg group cursor-pointer"
           >
             <Image
-              src={getStrapiURL(person.media.data.attributes.url)}
+              src={getStrapiMedia(person.media.data.attributes.url) || "/"}
               width={person.media.data.attributes.width}
               height={person.media.data.attributes.height}
               alt={person.name}
