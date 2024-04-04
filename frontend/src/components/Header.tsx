@@ -113,7 +113,7 @@ export default function Header({
   const logoUrl = getStrapiMedia(logo?.data?.attributes?.url) || "";
 
   return (
-    <header className="flex bg-white w-full h-full shadow-sm sticky top-0 z-50">
+    <header className="flex bg-white w-full h-full shadow sticky top-0 z-50">
       <div className="flex justify-between items-center w-full container mx-auto px-4 lg:px-0">
         <div>
           {logo?.data?.attributes?.url ? (
@@ -137,7 +137,7 @@ export default function Header({
               <NavigationMenuList className="flex flex-col w-full gap-0 space-x-0">
                 <NavigationMenuItem key={"language"} className="w-full">
                   <NavigationMenuLink
-                    className={`${navigationMenuTriggerStyle()} border-b-2 rounded-none lg:py-6 h-full w-full bg-accent cursor-pointer`}
+                    className={`${navigationMenuTriggerStyle()} border-b-2 rounded-none py-4 h-full w-full bg-accent cursor-pointer`}
                   >
                     <div className="flex flex-col items-center gap-1 w-4">
                       <HamburgerMenuIcon className="w-4 h-4" />
