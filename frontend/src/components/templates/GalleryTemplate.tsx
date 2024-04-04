@@ -7,11 +7,13 @@ import { Separator } from "../ui/separator";
 export default function GalleryTemplate({ content }: { content: any }) {
   return (
     <div>
-      <div className="pt-4 text-center space-y-1">
-        <h1 className="heading tracking-tight">{content.heading}</h1>
+      <div className="pt-4">
+        <h1 className="heading tracking-tight underline underline-offset-2 decoration-themePrimary">
+          {content.heading}
+        </h1>
         <h2 className="text-muted-foreground text-sm">{content.subheading}</h2>
       </div>
-      <Separator className="my-4" />
+      <Separator className="mt-2 mb-4" />
       {content.template[0].gallery.length === 0 && (
         <div>Please upload some content!</div>
       )}

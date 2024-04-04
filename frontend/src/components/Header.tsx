@@ -40,15 +40,15 @@ type IconMap = {
 };
 
 const iconMap: IconMap = {
-  Calendar: <CalendarDays className="w-5 h-5" />,
-  Speaker: <Pin className="w-5 h-5" />,
-  Sponsor: <GalleryHorizontalEnd className="w-5 h-5" />,
-  File: <Volume2 className="w-5 h-5" />,
-  caucus: <DashboardIcon className="w-5 h-5" />,
-  documents: <Files className="w-5 h-5" />,
-  parking: <CircleParking className="w-5 h-5" />,
-  contacts: <Contact className="w-5 h-5" />,
-  tradeShow: <CandlestickChart className="w-5 h-5" />, // Assuming you have a TradeIcon component
+  Calendar: <CalendarDays className="w-4 h-4" />,
+  Speaker: <Pin className="w-4 h-4" />,
+  Sponsor: <GalleryHorizontalEnd className="w-4 h-4" />,
+  File: <Volume2 className="w-4 h-4" />,
+  caucus: <DashboardIcon className="w-4 h-4" />,
+  documents: <Files className="w-4 h-4" />,
+  parking: <CircleParking className="w-4 h-4" />,
+  contacts: <Contact className="w-4 h-4" />,
+  tradeShow: <CandlestickChart className="w-4 h-4" />, // Assuming you have a TradeIcon component
 };
 
 const ShowIcon = (icon: string) => {
@@ -137,10 +137,10 @@ export default function Header({
               <NavigationMenuList className="flex flex-col w-full gap-0 space-x-0">
                 <NavigationMenuItem key={"language"} className="w-full">
                   <NavigationMenuLink
-                    className={`${navigationMenuTriggerStyle()} border-b-4 rounded-none lg:py-6 h-full w-full bg-accent cursor-pointer`}
+                    className={`${navigationMenuTriggerStyle()} border-b-2 rounded-none lg:py-6 h-full w-full bg-accent cursor-pointer`}
                   >
                     <div className="flex flex-col items-center gap-1 w-4">
-                      <HamburgerMenuIcon className="w-5 h-5" />
+                      <HamburgerMenuIcon className="w-4 h-4" />
                       <span className="font-medium text-xs text-center">
                         Menu
                       </span>
@@ -153,7 +153,7 @@ export default function Header({
           <SheetContent className="w-full">
             <SheetHeader>
               <SheetTitle>
-                <div className="flex py-4">
+                <div>
                   {logo?.data?.attributes?.url ? (
                     <Link href={`/${slug}`} legacyBehavior passHref>
                       <Image
@@ -161,7 +161,7 @@ export default function Header({
                         alt="logo"
                         width={logo?.data?.attributes?.width}
                         height={logo?.data?.attributes?.height}
-                        className="max-h-20 object-contain cursor-pointer w-full"
+                        className="max-h-20 object-contain cursor-pointer max-w-64"
                       />
                     </Link>
                   ) : (
@@ -191,7 +191,7 @@ export default function Header({
                             }`}
                           >
                             <SheetClose asChild>
-                              <div className="flex items-center gap-1 w-full">
+                              <div className="flex items-center gap-2 w-full">
                                 {ShowIcon(tab.attributes.icon)}
                                 <span className="font-medium text-xs">
                                   {tab.attributes.tab_name}
@@ -213,8 +213,8 @@ export default function Header({
                           toggleLanguage(currentLocale === "en" ? "fr" : "en")
                         }
                       >
-                        <div className="flex items-center gap-1 w-full">
-                          <Globe className="w-5 h-5" />
+                        <div className="flex items-center gap-2 w-full">
+                          <Globe className="w-4 h-4" />
                           <span className="font-medium text-xs ">
                             {currentLocale.toUpperCase()}
                           </span>
@@ -238,13 +238,13 @@ export default function Header({
                   passHref
                 >
                   <NavigationMenuLink
-                    className={`${navigationMenuTriggerStyle()} border-b-4 rounded-none lg:py-6 h-full w-full ${
+                    className={`${navigationMenuTriggerStyle()} border-b-2 rounded-none lg:py-5 h-full w-full ${
                       normalizePathname(pathname) === `/${tab.attributes.url}`
                         ? "border-themePrimary bg-accent"
                         : ""
                     }`}
                   >
-                    <div className="flex flex-col items-center gap-1 w-24">
+                    <div className="flex  items-center gap-1 min-w-20">
                       {ShowIcon(tab.attributes.icon)}
                       <span className="font-medium text-xs text-center">
                         {tab.attributes.tab_name}
@@ -262,10 +262,10 @@ export default function Header({
               }
             >
               <NavigationMenuLink
-                className={`${navigationMenuTriggerStyle()} border-b-4 rounded-none lg:py-6 h-full w-full bg-accent cursor-pointer`}
+                className={`${navigationMenuTriggerStyle()} border-b-2 rounded-none lg:py-5 h-full w-full bg-accent cursor-pointer`}
               >
-                <div className="flex flex-col items-center gap-1 w-24">
-                  <Globe className="w-5 h-5" />
+                <div className="flex  items-center gap-1 w-full">
+                  <Globe className="w-4 h-4" />
                   <span className="font-medium text-xs text-center">
                     {currentLocale.toUpperCase()}
                   </span>

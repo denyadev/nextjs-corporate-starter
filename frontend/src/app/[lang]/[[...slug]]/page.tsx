@@ -15,7 +15,7 @@ export default async function PageRoute({
 
   if (slug.length < 2) {
     console.error("Slug is not complete.");
-    return <div>Hey Welcome</div>;
+    return null;
   }
 
   const organizationSlug = slug[0];

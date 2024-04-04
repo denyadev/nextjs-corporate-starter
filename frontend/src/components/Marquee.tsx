@@ -5,12 +5,7 @@ import MarqueeComponent from "react-fast-marquee";
 
 export default function Marquee({ marquee }: { marquee: any }) {
   return (
-    <MarqueeComponent
-      className="py-2 shadow"
-      autoFill
-      speed={20}
-      gradient={false}
-    >
+    <MarqueeComponent className="py-4" autoFill speed={20} gradient={false}>
       {marquee.map((item: any, index: number) => (
         <div key={index}>
           {item.marquee_text &&
@@ -34,7 +29,7 @@ export default function Marquee({ marquee }: { marquee: any }) {
                     width={imageItem.media.data.attributes.width}
                     height={imageItem.media.data.attributes.height}
                     alt={`Marquee image ${imageIndex + 1}`}
-                    className="max-h-8 object-contain w-64 mx-32 inline-block"
+                    className="max-h-12 object-contain w-64 mx-32 inline-block"
                   />
                 );
               }

@@ -2,7 +2,7 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   formatDate,
   getStrapiMedia,
@@ -15,27 +15,39 @@ import { Separator } from "../ui/separator";
 
 export default function AgendaTemplate({ content }: { content: any }) {
   const [selectedDate, setSelectedDate] = useState<string | null>(
-    content.template[0].Date
+    content.template.sort(
+      (a: any, b: any) =>
+        new Date(a.Date).getTime() - new Date(b.Date).getTime()
+    )[0]?.Date
   );
 
-  const filteredAgenda = selectedDate
-    ? content.template.filter((day: any) => day.Date === selectedDate)[0]
-        ?.agenda || []
-    : [];
+  // State to hold the sorted agenda for the selected date
+  const [sortedAgenda, setSortedAgenda] = useState<any[]>([]);
 
-  const sortedAgenda = filteredAgenda.sort((a: any, b: any) =>
-    a.start_time.localeCompare(b.start_time)
-  );
+  // Effect to update sortedAgenda whenever selectedDate changes
+  useEffect(() => {
+    if (selectedDate) {
+      const dayAgenda =
+        content.template.find((day: any) => day.Date === selectedDate)
+          ?.agenda || [];
+      const sortedByTime = dayAgenda.sort((a: any, b: any) =>
+        a.start_time.localeCompare(b.start_time)
+      );
+      setSortedAgenda(sortedByTime);
+    }
+  }, [selectedDate, content.template]);
 
   return (
     <div>
-      <div className="pt-4 text-center space-y-1">
-        <h1 className="heading tracking-tight">{content.heading}</h1>
+      <div className="pt-4">
+        <h1 className="heading tracking-tight underline underline-offset-2 decoration-themePrimary">
+          {content.heading}
+        </h1>
         <h2 className="text-muted-foreground text-sm">{content.subheading}</h2>
       </div>
-      <Separator className="my-4" />
+      <Separator className="mt-2 mb-4" />
 
-      <div className="flex justify-center mb-4">
+      <div className="flex mb-4 flex-wrap">
         {content.template.map((day: any, index: number) => (
           <Button
             key={index}
@@ -65,8 +77,6 @@ export default function AgendaTemplate({ content }: { content: any }) {
 }
 
 function AgendaItem({ item, index }: { item: any; index: number }) {
-  //   const { t, i18n } = useTranslation();
-  //   const currentLocale = i18n.language;
   const [isDescriptionVisible, setIsDescriptionVisible] = useState(false);
 
   const hasDescription = !!item.description;

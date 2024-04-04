@@ -48,17 +48,22 @@ export default async function MainLayout({
         resources={resources}
       >
         <ThemeProvider theme={themeData}>
-          {marqueeData && marqueeData.length > 0 && (
-            <Marquee marquee={marqueeData} />
-          )}
-          {bannerData?.data && <Banner banner={bannerData} />}
+          {/* {bannerData?.data && <Banner banner={bannerData} />} */}
           <Header
             logo={logoData}
             slug={slug[0]}
             tabs={pagesData}
             localization={localizationData}
           />
-          <div className="container mx-auto px-4 lg:px-0 pb-8">{children}</div>
+          <div className="container mx-auto px-4 lg:px-0 pb-8">
+            {marqueeData && marqueeData.length > 0 && (
+              <Marquee marquee={marqueeData} />
+            )}
+            {slug.length === 2 && bannerData?.data && (
+              <Banner banner={bannerData} />
+            )}
+            {children}
+          </div>
         </ThemeProvider>
       </TranslationsProvider>
     </section>
