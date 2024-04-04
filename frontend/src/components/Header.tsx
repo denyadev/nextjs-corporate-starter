@@ -61,15 +61,18 @@ export default function Header({
   logo,
   tabs,
   slug,
+  localization,
 }: {
   logo: any;
   tabs: any;
   slug: string;
+  localization: any;
 }) {
   const pathname = usePathname() || "/";
   const { i18n } = useTranslation();
   const currentLocale = i18n.language;
   const router = useRouter();
+  console.log(localization);
 
   const normalizePathname = (path: string) => {
     const locales = ["en", "fr"]; // List of supported locales
@@ -120,7 +123,7 @@ export default function Header({
                 alt="logo"
                 width={logo?.data?.attributes?.width}
                 height={logo?.data?.attributes?.height}
-                className="max-h-24 object-contain cursor-pointer w-full"
+                className="max-h-20 object-contain cursor-pointer w-full"
               />
             </Link>
           ) : (
@@ -158,7 +161,7 @@ export default function Header({
                         alt="logo"
                         width={logo?.data?.attributes?.width}
                         height={logo?.data?.attributes?.height}
-                        className="max-h-24 object-contain cursor-pointer w-full"
+                        className="max-h-20 object-contain cursor-pointer w-full"
                       />
                     </Link>
                   ) : (

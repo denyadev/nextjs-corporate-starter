@@ -33,6 +33,7 @@ export default async function MainLayout({
   const logoData = data?.data[0]?.attributes?.logo;
   const pagesData = data?.data[0]?.attributes?.pages?.data || [];
   const marqueeData = data?.data[0]?.attributes?.marquee;
+  const localizationData = data?.data[0]?.attributes?.localizations;
   const themeData = {
     primary: data?.data[0]?.attributes?.primary_color,
     secondary: data?.data[0]?.attributes?.accent_color,
@@ -51,7 +52,12 @@ export default async function MainLayout({
             <Marquee marquee={marqueeData} />
           )}
           {bannerData?.data && <Banner banner={bannerData} />}
-          <Header logo={logoData} slug={slug[0]} tabs={pagesData} />
+          <Header
+            logo={logoData}
+            slug={slug[0]}
+            tabs={pagesData}
+            localization={localizationData}
+          />
           <div className="container mx-auto px-4 lg:px-0 pb-8">{children}</div>
         </ThemeProvider>
       </TranslationsProvider>
