@@ -238,13 +238,13 @@ export default function Header({
                   passHref
                 >
                   <NavigationMenuLink
-                    className={`${navigationMenuTriggerStyle()} border-b-2 rounded-none lg:py-5 h-full w-full ${
+                    className={`${navigationMenuTriggerStyle()} border-b-2 rounded-none lg:py-8 h-full w-full ${
                       normalizePathname(pathname) === `/${tab.attributes.url}`
                         ? "border-themePrimary bg-accent"
                         : ""
                     }`}
                   >
-                    <div className="flex  items-center gap-1 min-w-20">
+                    <div className="flex justify-center items-center gap-1 min-w-20">
                       {ShowIcon(tab.attributes.icon)}
                       <span className="font-medium text-xs text-center">
                         {tab.attributes.tab_name}
@@ -262,9 +262,9 @@ export default function Header({
               }
             >
               <NavigationMenuLink
-                className={`${navigationMenuTriggerStyle()} border-b-2 rounded-none lg:py-5 h-full w-full bg-accent cursor-pointer`}
+                className={`${navigationMenuTriggerStyle()} border-b-2 rounded-none lg:py-8 h-full w-full bg-accent cursor-pointer`}
               >
-                <div className="flex  items-center gap-1 w-full">
+                <div className="flex justify-center items-center gap-1 w-full">
                   <Globe className="w-4 h-4" />
                   <span className="font-medium text-xs text-center">
                     {currentLocale.toUpperCase()}
