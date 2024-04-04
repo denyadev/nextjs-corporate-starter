@@ -2,14 +2,16 @@
 import { getStrapiMedia } from "@/utils/api-helpers";
 import Image from "next/image";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
+import { Separator } from "../ui/separator";
 
 export default function GalleryTemplate({ content }: { content: any }) {
   return (
     <div>
-      <div className="my-4">
-        <h1 className="heading">{content.heading}</h1>
-        <h2 className="text-muted-foreground">{content.subheading}</h2>
+      <div className="pt-4 text-center space-y-1">
+        <h1 className="heading tracking-tight">{content.heading}</h1>
+        <h2 className="text-muted-foreground text-sm">{content.subheading}</h2>
       </div>
+      <Separator className="my-4" />
       {content.template[0].gallery.length === 0 && (
         <div>Please upload some content!</div>
       )}
@@ -26,7 +28,7 @@ export default function GalleryTemplate({ content }: { content: any }) {
 
 function GalleryItem({ image }: { image: any }) {
   return (
-    <div className="relative group w-full hover:cursor-pointer">
+    <div className="relative group w-full">
       <Image
         src={getStrapiMedia(image?.media?.data?.attributes?.url) || "/"}
         width={image?.media?.data?.attributes?.width}

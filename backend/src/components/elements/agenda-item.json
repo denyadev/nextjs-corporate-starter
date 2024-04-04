@@ -19,13 +19,20 @@
       "type": "time"
     },
     "media": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
       "allowedTypes": [
         "files"
-      ],
-      "type": "media",
-      "multiple": true
+      ]
     },
     "notes": {
+      "type": "blocks"
+    },
+    "locations": {
+      "type": "blocks"
+    },
+    "speakers": {
       "type": "blocks"
     }
   }

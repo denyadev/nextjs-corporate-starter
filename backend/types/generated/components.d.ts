@@ -13,6 +13,8 @@ export interface ElementsAgendaItem extends Schema.Component {
     end_time: Attribute.Time;
     media: Attribute.Media;
     notes: Attribute.Blocks;
+    locations: Attribute.Blocks;
+    speakers: Attribute.Blocks;
   };
 }
 

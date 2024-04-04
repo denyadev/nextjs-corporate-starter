@@ -120,7 +120,7 @@ export default function Header({
                 alt="logo"
                 width={logo?.data?.attributes?.width}
                 height={logo?.data?.attributes?.height}
-                className="h-12 w-full object-contain cursor-pointer"
+                className="max-h-24 object-contain cursor-pointer w-full"
               />
             </Link>
           ) : (
@@ -158,7 +158,7 @@ export default function Header({
                         alt="logo"
                         width={logo?.data?.attributes?.width}
                         height={logo?.data?.attributes?.height}
-                        className="h-12 w-full object-contain cursor-pointer"
+                        className="max-h-24 object-contain cursor-pointer w-full"
                       />
                     </Link>
                   ) : (

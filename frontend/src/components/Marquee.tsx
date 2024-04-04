@@ -6,18 +6,18 @@ import MarqueeComponent from "react-fast-marquee";
 export default function Marquee({ marquee }: { marquee: any }) {
   return (
     <MarqueeComponent
-      className="py-4 bg-white border-b"
+      className="py-2 shadow"
       autoFill
       speed={20}
       gradient={false}
     >
       {marquee.map((item: any, index: number) => (
-        <>
+        <div key={index}>
           {item.marquee_text &&
             item.marquee_text.map((textItem: any, textIndex: number) => (
               <span
                 key={`text-${index}-${textIndex}`}
-                className="inline-block mx-24 text-lg"
+                className="inline-block mx-24 text-lg italic font-bold text-themePrimary"
               >
                 {textItem.text}
               </span>
@@ -34,12 +34,12 @@ export default function Marquee({ marquee }: { marquee: any }) {
                     width={imageItem.media.data.attributes.width}
                     height={imageItem.media.data.attributes.height}
                     alt={`Marquee image ${imageIndex + 1}`}
-                    className="inline-block mx-24 h-12 w-64 object-contain"
+                    className="max-h-8 object-contain w-64 mx-32 inline-block"
                   />
                 );
               }
             })}
-        </>
+        </div>
       ))}
     </MarqueeComponent>
   );

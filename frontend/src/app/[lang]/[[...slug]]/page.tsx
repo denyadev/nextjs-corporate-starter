@@ -6,8 +6,6 @@ export default async function PageRoute({
 }: {
   params: { lang: string; slug?: string[] };
 }) {
-  // console.log("Received params", params);
-
   const { lang, slug } = params;
 
   if (!slug || slug.length === 0) {
@@ -34,8 +32,6 @@ export default async function PageRoute({
   if (!page || !page.template || page.template.length === 0) {
     return <div>No content available</div>;
   }
-
-  console.log(page);
 
   return <div>{templateRenderer(page)}</div>;
 }
