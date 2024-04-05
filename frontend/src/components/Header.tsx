@@ -130,16 +130,16 @@ export default function Header({
       <div className="flex justify-between items-center w-full container mx-auto px-4 lg:px-0">
         <div>
           {logo?.data?.attributes?.url ? (
-            <Link href={`/${slug}`} legacyBehavior passHref>
-              <Image
-                src={logoUrl}
-                alt="logo"
-                width={logo?.data?.attributes?.width}
-                height={logo?.data?.attributes?.height}
-                className="max-h-20 object-contain cursor-pointer w-full"
-              />
-            </Link>
+            // <Link href={`/${slug}`} legacyBehavior passHref>
+            <Image
+              src={logoUrl}
+              alt="logo"
+              width={logo?.data?.attributes?.width}
+              height={logo?.data?.attributes?.height}
+              className="max-h-20 object-contain cursor-pointer w-full"
+            />
           ) : (
+            // </Link>
             <div>Logo Goes Here</div>
           )}
         </div>
@@ -168,16 +168,16 @@ export default function Header({
               <SheetTitle>
                 <div>
                   {logo?.data?.attributes?.url ? (
-                    <Link href={`/${slug}`} legacyBehavior passHref>
-                      <Image
-                        src={logoUrl}
-                        alt="logo"
-                        width={logo?.data?.attributes?.width}
-                        height={logo?.data?.attributes?.height}
-                        className="max-h-20 object-contain cursor-pointer max-w-64"
-                      />
-                    </Link>
+                    // <Link href={`/${slug}`} legacyBehavior passHref>
+                    <Image
+                      src={logoUrl}
+                      alt="logo"
+                      width={logo?.data?.attributes?.width}
+                      height={logo?.data?.attributes?.height}
+                      className="max-h-20 object-contain cursor-pointer max-w-64"
+                    />
                   ) : (
+                    // </Link>
                     <div>Logo Goes Here</div>
                   )}
                 </div>
