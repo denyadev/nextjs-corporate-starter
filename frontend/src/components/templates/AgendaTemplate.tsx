@@ -208,7 +208,7 @@ function AgendaItem({ item, index }: { item: any; index: number }) {
 
             return (
               <Link
-                href={getStrapiURL(file.url)} // Construct the URL using getStrapiURL for local files
+                href={getStrapiMedia(file.url) || ""} // Construct the URL using getStrapiURL for local files
                 target="_blank"
                 rel="noopener noreferrer"
                 key={index}
