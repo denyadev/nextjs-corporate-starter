@@ -13,7 +13,7 @@ export default function SponsorsTemplate({ content }: { content: any }) {
         <h2 className="text-muted-foreground text-sm">{content.subheading}</h2>
       </div>
       <Separator className="mt-2 mb-4" />
-      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
         {content.template[0].sponsor.length === 0 && (
           <div>Please upload some content!</div>
         )}
