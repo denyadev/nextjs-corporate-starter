@@ -20,7 +20,6 @@ module.exports = {
       colors: {
         themePrimary: "var(--theme-primary)",
         themeAccent: "var(--theme-accent)",
-        themeBorderRadius: "var(--theme-border-radius)",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
