@@ -140,40 +140,46 @@ function AgendaItem({ item, index }: { item: any; index: number }) {
       <div className="ml-12 flex flex-col space-y-1">
         <div className="flex gap-1">
           {item.locations &&
-            item.locations.map((locationList: any, index: number) => (
-              <ul key={index}>
+            item.locations.map((locationList: any, listIndex: number) => (
+              <ul key={listIndex} className="flex gap-1">
                 {locationList.children.map(
-                  (locationItem: any, locationIndex: number) => (
-                    <Link key={locationIndex} href="/floor-plan">
-                      <Badge
-                        variant="secondary"
-                        className="gap-2 text-xs hover:border-l-4 hover:border-l-themePrimary"
-                      >
-                        <MapPinned className="flex-shrink-0 w-5 h-5 text-themePrimary" />
-                        {locationItem.text}
-                      </Badge>
-                    </Link>
-                  )
+                  (locationItem: any, itemIndex: number) =>
+                    locationItem.text !== "" ? (
+                      <li key={itemIndex}>
+                        <Link href="/floor-plan">
+                          <Badge
+                            variant="secondary"
+                            className="gap-2 text-xs hover:border-l-4 hover:border-l-themePrimary"
+                          >
+                            <MapPinned className="flex-shrink-0 w-5 h-5 text-themePrimary" />
+                            {locationItem.text}
+                          </Badge>
+                        </Link>
+                      </li>
+                    ) : null
                 )}
               </ul>
             ))}
         </div>
         <div className="flex gap-1">
           {item.speakers &&
-            item.speakers.map((speakerList: any, index: number) => (
-              <ul key={index}>
+            item.speakers.map((speakerList: any, listIndex: number) => (
+              <ul key={listIndex}>
                 {speakerList.children.map(
-                  (speakerItem: any, speakerIndex: number) => (
-                    <Link key={speakerIndex} href="/speakers">
-                      <Badge
-                        variant="secondary"
-                        className="gap-2 text-xs hover:border-l-4 hover:border-l-emerald-600"
-                      >
-                        <Volume2 className="flex-shrink-0 w-5 h-5 text-emerald-600" />
-                        {speakerItem.text}
-                      </Badge>
-                    </Link>
-                  )
+                  (speakerItem: any, itemIndex: number) =>
+                    speakerItem.text !== "" ? (
+                      <li key={itemIndex}>
+                        <Link href="/speakers">
+                          <Badge
+                            variant="secondary"
+                            className="gap-2 text-xs hover:border-l-4 hover:border-l-emerald-600"
+                          >
+                            <Volume2 className="flex-shrink-0 w-5 h-5 text-emerald-600" />
+                            {speakerItem.text}
+                          </Badge>
+                        </Link>
+                      </li>
+                    ) : null
                 )}
               </ul>
             ))}
