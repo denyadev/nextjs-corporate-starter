@@ -34,6 +34,7 @@ export default async function MainLayout({
     return <Error />;
   }
 
+  const orgName = data?.data[0]?.attributes?.name;
   const bannerData = data?.data[0]?.attributes?.banner;
   const logoData = data?.data[0]?.attributes?.logo;
   const pagesData = data?.data[0]?.attributes?.pages?.data || [];
@@ -70,11 +71,8 @@ export default async function MainLayout({
             {slug.length === 1 && data?.data[0] && (
               <div className="mt-4">
                 <h1 className="heading text-6xl">
-                  Welcome to{" "}
-                  <span className="text-themePrimary">
-                    {data?.data[0].attributes?.name}
-                  </span>
-                  .
+                  Welcome to the{" "}
+                  <span className="text-themePrimary">{orgName}</span>.
                 </h1>
               </div>
             )}
