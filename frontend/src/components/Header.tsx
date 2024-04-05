@@ -18,14 +18,28 @@ import {
 } from "@/components/ui/navigation-menu";
 import Image from "next/image";
 import {
+  Award,
+  BookOpen,
+  Building,
+  BusFront,
   CalendarDays,
   CandlestickChart,
+  Car,
   CircleParking,
   Contact,
   Files,
+  FolderLock,
   GalleryHorizontalEnd,
+  Gift,
   Globe,
+  GraduationCap,
+  Landmark,
+  MessageSquare,
+  PartyPopper,
   Pin,
+  Salad,
+  Share2,
+  UserRound,
   Volume2,
 } from "lucide-react";
 import { DashboardIcon, HamburgerMenuIcon } from "@radix-ui/react-icons";
@@ -41,14 +55,28 @@ type IconMap = {
 
 const iconMap: IconMap = {
   Calendar: <CalendarDays className="w-4 h-4" />,
-  Speaker: <Pin className="w-4 h-4" />,
-  Sponsor: <GalleryHorizontalEnd className="w-4 h-4" />,
-  File: <Volume2 className="w-4 h-4" />,
-  caucus: <DashboardIcon className="w-4 h-4" />,
-  documents: <Files className="w-4 h-4" />,
-  parking: <CircleParking className="w-4 h-4" />,
-  contacts: <Contact className="w-4 h-4" />,
-  tradeShow: <CandlestickChart className="w-4 h-4" />, // Assuming you have a TradeIcon component
+  Pin: <Pin className="w-4 h-4" />,
+  Gallery: <GalleryHorizontalEnd className="w-4 h-4" />,
+  Volume: <Volume2 className="w-4 h-4" />,
+  Dashboard: <DashboardIcon className="w-4 h-4" />,
+  Files: <Files className="w-4 h-4" />,
+  Parking: <CircleParking className="w-4 h-4" />,
+  Contacts: <Contact className="w-4 h-4" />,
+  CandlestickChart: <CandlestickChart className="w-4 h-4" />,
+  Graduation: <GraduationCap className="w-4 h-4" />,
+  Building: <Building className="w-4 h-4" />,
+  Landmark: <Landmark className="w-4 h-4" />,
+  Gift: <Gift className="w-4 h-4" />,
+  Award: <Award className="w-4 h-4" />,
+  Share: <Share2 className="w-4 h-4" />,
+  Message: <MessageSquare className="w-4 h-4" />,
+  User: <UserRound className="w-4 h-4" />,
+  Book: <BookOpen className="w-4 h-4" />,
+  Salad: <Salad className="w-4 h-4" />,
+  Bus: <BusFront className="w-4 h-4" />,
+  Car: <Car className="w-4 h-4" />,
+  Party: <PartyPopper className="w-4 h-4" />,
+  FolderLock: <FolderLock className="w-4 h-4" />,
 };
 
 const ShowIcon = (icon: string) => {
