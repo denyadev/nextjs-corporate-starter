@@ -1,6 +1,7 @@
 import { getStrapiMedia } from "@/utils/api-helpers";
 import Image from "next/image";
 import { Separator } from "../ui/separator";
+import { Card } from "../ui/card";
 
 export default function SponsorsTemplate({ content }: { content: any }) {
   console.log("SponsorTemplate content", content);
@@ -13,12 +14,12 @@ export default function SponsorsTemplate({ content }: { content: any }) {
         <h2 className="text-muted-foreground text-sm">{content.subheading}</h2>
       </div>
       <Separator className="mt-2 mb-4" />
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
         {content.template[0].sponsor.length === 0 && (
           <div>Please upload some content!</div>
         )}
         {content.template[0].sponsor.map((sponsor: any, index: number) => (
-          <div className="group relative block hover:bg-black select-none min-h-[200px]">
+          <Card className="group relative block hover:bg-black select-none min-h-[200px]">
             <Image
               src={getStrapiMedia(sponsor.media.data.attributes.url) || "/"}
               width={sponsor.media.data.attributes.width}
@@ -35,7 +36,7 @@ export default function SponsorsTemplate({ content }: { content: any }) {
                 </div>
               </div>
             </div>
-          </div>
+          </Card>
         ))}
       </div>
     </div>
