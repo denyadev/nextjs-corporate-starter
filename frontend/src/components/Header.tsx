@@ -57,10 +57,10 @@ const ShowIcon = (icon: string) => {
   return <>{IconComponent}</>;
 };
 
-function getUniqueLocales(dataArray) {
+function getUniqueLocales(dataArray: any) {
   const localesSet = new Set();
 
-  dataArray.forEach((item) => {
+  dataArray.forEach((item: any) => {
     const locale = item.attributes?.locale;
     if (locale) {
       localesSet.add(locale);
