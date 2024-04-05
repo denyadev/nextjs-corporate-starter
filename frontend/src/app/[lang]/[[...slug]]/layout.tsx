@@ -71,7 +71,10 @@ export default async function MainLayout({
               <div className="mt-4">
                 <h1 className="heading text-6xl">
                   Welcome to{" "}
-                  <span className="text-themePrimary">{slug[0]}</span>.
+                  <span className="text-themePrimary">
+                    {data?.data[0].attributes?.name}
+                  </span>
+                  .
                 </h1>
               </div>
             )}
