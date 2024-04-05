@@ -23,6 +23,7 @@ export function formatDate(dateString: string) {
   const options: Intl.DateTimeFormatOptions = {
     month: "long",
     day: "numeric",
+    timeZone: "UTC",
   };
   return date.toLocaleDateString("en-US", options);
 }
