@@ -5,14 +5,19 @@ import MarqueeComponent from "react-fast-marquee";
 
 export default function Marquee({ marquee }: { marquee: any }) {
   return (
-    <MarqueeComponent className="py-4" autoFill speed={20} gradient={false}>
+    <MarqueeComponent
+      className="py-2 md:py-4"
+      autoFill
+      speed={20}
+      gradient={false}
+    >
       {marquee.map((item: any, index: number) => (
         <div key={index}>
           {item.marquee_text &&
             item.marquee_text.map((textItem: any, textIndex: number) => (
               <span
                 key={`text-${index}-${textIndex}`}
-                className="inline-block mx-24 text-lg italic font-bold text-themePrimary"
+                className="inline-block mx-12 md:mx-24 md:text-lg italic font-bold text-themePrimary"
               >
                 {textItem.text}
               </span>
