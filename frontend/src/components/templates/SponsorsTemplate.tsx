@@ -24,7 +24,7 @@ export default function SponsorsTemplate({ content }: { content: any }) {
               width={sponsor.media.data.attributes.width}
               height={sponsor.media.data.attributes.height}
               alt={sponsor.name}
-              className="absolute inset-0 h-full w-full object-cover transition-opacity group-hover:opacity-50"
+              className="p-8 absolute inset-0 h-full w-full object-contain transition-opacity group-hover:opacity-50"
             />
 
             <div className="relative p-4 sm:p-6 lg:p-8">
