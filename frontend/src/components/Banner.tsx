@@ -5,7 +5,7 @@ export default function Banner({ banner }: { banner: any }) {
   const bannerUrl = getStrapiMedia(banner?.data?.attributes?.url) || "";
   if (!banner) return null;
   return (
-    <div className="w-full h-full pt-2">
+    <div className="w-full h-full">
       <Image
         src={bannerUrl}
         alt="banner"

@@ -60,7 +60,7 @@ export default async function MainLayout({
             tabs={pagesData}
             localization={localizationData}
           />
-          <div className="container mx-auto px-4 lg:px-0 pb-8">
+          <div className="container mx-auto px-4 lg:px-0 pb-8 mt-2">
             {marqueeData && marqueeData.length > 0 && (
               <Marquee marquee={marqueeData} />
             )}
