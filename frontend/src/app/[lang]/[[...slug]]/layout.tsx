@@ -5,6 +5,7 @@ import initTranslations from "@/app/i18n";
 import TranslationsProvider from "@/context/TranslationsProvider";
 import Marquee from "@/components/Marquee";
 import { getStrapiURL } from "@/utils/api-helpers";
+import Error from "@/components/Error";
 
 export const revalidate = 0;
 const i18nNamespaces = ["default"];
@@ -28,6 +29,10 @@ export default async function MainLayout({
   const response = await fetch(url);
 
   const data = await response.json();
+
+  if (!data || !data.data || data.data.length === 0) {
+    return <Error />;
+  }
 
   const bannerData = data?.data[0]?.attributes?.banner;
   const logoData = data?.data[0]?.attributes?.logo;
@@ -59,8 +64,16 @@ export default async function MainLayout({
             {marqueeData && marqueeData.length > 0 && (
               <Marquee marquee={marqueeData} />
             )}
-            {slug.length === 2 && bannerData?.data && (
+            {slug.length > 0 && bannerData?.data && (
               <Banner banner={bannerData} />
+            )}
+            {slug.length === 1 && data?.data[0] && (
+              <div className="mt-4">
+                <h1 className="heading text-6xl">
+                  Welcome to{" "}
+                  <span className="text-themePrimary">{slug[0]}</span>.
+                </h1>
+              </div>
             )}
             {children}
           </div>

@@ -85,9 +85,8 @@ export default function Header({
   const { i18n } = useTranslation();
   const currentLocale = i18n.language;
   const router = useRouter();
-  console.log(localization);
-  const uniqueLocales = getUniqueLocales(localization.data);
-  console.log(uniqueLocales);
+  const uniqueLocales = getUniqueLocales(localization?.data);
+
   const normalizePathname = (path: string) => {
     const locales = ["en", "fr"]; // List of supported locales
     const pathSegments = path.split("/").filter(Boolean); // Split the pathname into segments and remove empty strings
