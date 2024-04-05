@@ -24,7 +24,7 @@ export default function SponsorsTemplate({ content }: { content: any }) {
               width={person.media.data.attributes.width}
               height={person.media.data.attributes.height}
               alt={person.name}
-              className="w-full object-cover transition-transform group-hover:scale-105 min-h-[200px]"
+              className="w-full object-contain transition-transform group-hover:scale-105 min-h-[200px]"
               style={{ height: "100%" }}
             />
             <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-70 p-4 transition-opacity duration-300 group-hover:bg-opacity-80">
