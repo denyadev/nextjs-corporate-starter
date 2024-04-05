@@ -57,6 +57,19 @@ const ShowIcon = (icon: string) => {
   return <>{IconComponent}</>;
 };
 
+function getUniqueLocales(dataArray) {
+  const localesSet = new Set();
+
+  dataArray.forEach((item) => {
+    const locale = item.attributes?.locale;
+    if (locale) {
+      localesSet.add(locale);
+    }
+  });
+
+  return Array.from(localesSet);
+}
+
 export default function Header({
   logo,
   tabs,
@@ -73,7 +86,8 @@ export default function Header({
   const currentLocale = i18n.language;
   const router = useRouter();
   console.log(localization);
-
+  const uniqueLocales = getUniqueLocales(localization.data);
+  console.log(uniqueLocales);
   const normalizePathname = (path: string) => {
     const locales = ["en", "fr"]; // List of supported locales
     const pathSegments = path.split("/").filter(Boolean); // Split the pathname into segments and remove empty strings
@@ -202,25 +216,31 @@ export default function Header({
                         </Link>
                       </NavigationMenuItem>
                     ))}
-                    <Separator className="my-1" />
-                    <NavigationMenuItem
-                      key={"language"}
-                      className="flex w-full"
-                    >
-                      <NavigationMenuLink
-                        className={`${navigationMenuTriggerStyle()}  border-l-2 rounded-none py-4 h-full w-full bg-accent cursor-pointer`}
-                        onClick={() =>
-                          toggleLanguage(currentLocale === "en" ? "fr" : "en")
-                        }
-                      >
-                        <div className="flex items-center gap-2 w-full">
-                          <Globe className="w-4 h-4" />
-                          <span className="font-medium text-xs ">
-                            {currentLocale.toUpperCase()}
-                          </span>
-                        </div>
-                      </NavigationMenuLink>
-                    </NavigationMenuItem>
+                    {uniqueLocales.length > 0 && (
+                      <>
+                        <Separator className="my-1" />
+                        <NavigationMenuItem
+                          key={"language"}
+                          className="flex w-full"
+                        >
+                          <NavigationMenuLink
+                            className={`${navigationMenuTriggerStyle()}  border-l-2 rounded-none py-4 h-full w-full bg-accent cursor-pointer`}
+                            onClick={() =>
+                              toggleLanguage(
+                                currentLocale === "en" ? "fr" : "en"
+                              )
+                            }
+                          >
+                            <div className="flex items-center gap-2 w-full">
+                              <Globe className="w-4 h-4" />
+                              <span className="font-medium text-xs ">
+                                {currentLocale.toUpperCase()}
+                              </span>
+                            </div>
+                          </NavigationMenuLink>
+                        </NavigationMenuItem>
+                      </>
+                    )}
                   </NavigationMenuList>
                 </NavigationMenu>
               </SheetDescription>
@@ -254,24 +274,26 @@ export default function Header({
                 </Link>
               </NavigationMenuItem>
             ))}
-            <NavigationMenuItem
-              key={"language"}
-              className="w-full"
-              onClick={() =>
-                toggleLanguage(currentLocale === "en" ? "fr" : "en")
-              }
-            >
-              <NavigationMenuLink
-                className={`${navigationMenuTriggerStyle()} border-b-2 rounded-none lg:py-8 h-full w-full bg-accent cursor-pointer`}
+            {uniqueLocales.length > 0 && (
+              <NavigationMenuItem
+                key={"language"}
+                className="w-full"
+                onClick={() =>
+                  toggleLanguage(currentLocale === "en" ? "fr" : "en")
+                }
               >
-                <div className="flex justify-center items-center gap-1 w-full">
-                  <Globe className="w-4 h-4" />
-                  <span className="font-medium text-xs text-center">
-                    {currentLocale.toUpperCase()}
-                  </span>
-                </div>
-              </NavigationMenuLink>
-            </NavigationMenuItem>
+                <NavigationMenuLink
+                  className={`${navigationMenuTriggerStyle()} border-b-2 rounded-none lg:py-8 h-full w-full bg-accent cursor-pointer`}
+                >
+                  <div className="flex justify-center items-center gap-1 w-full">
+                    <Globe className="w-4 h-4" />
+                    <span className="font-medium text-xs text-center">
+                      {currentLocale.toUpperCase()}
+                    </span>
+                  </div>
+                </NavigationMenuLink>
+              </NavigationMenuItem>
+            )}
           </NavigationMenuList>
         </NavigationMenu>
       </div>
