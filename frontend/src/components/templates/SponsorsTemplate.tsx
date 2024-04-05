@@ -18,13 +18,13 @@ export default function SponsorsTemplate({ content }: { content: any }) {
           <div>Please upload some content!</div>
         )}
         {content.template[0].sponsor.map((sponsor: any, index: number) => (
-          <div className="group relative block bg-black select-none h-[200px]">
+          <div className="group relative block hover:bg-black select-none min-h-[200px]">
             <Image
               src={getStrapiMedia(sponsor.media.data.attributes.url) || "/"}
               width={sponsor.media.data.attributes.width}
               height={sponsor.media.data.attributes.height}
               alt={sponsor.name}
-              className="absolute inset-0 h-full w-full object-cover opacity-75 transition-opacity group-hover:opacity-50"
+              className="absolute inset-0 h-full w-full object-cover transition-opacity group-hover:opacity-50"
             />
 
             <div className="relative p-4 sm:p-6 lg:p-8">
