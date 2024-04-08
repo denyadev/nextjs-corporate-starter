@@ -66,8 +66,6 @@ function AgendaItem({ item, index }: { item: any; index: number }) {
     }
   };
 
-  console.log(item);
-
   return (
     <div
       className={`hover:bg-slate-50 p-3 w-full space-y-4 transition duration-200`}

@@ -6,6 +6,7 @@ import TranslationsProvider from "@/context/TranslationsProvider";
 import Marquee from "@/components/Marquee";
 import { getStrapiURL } from "@/utils/api-helpers";
 import Error from "@/components/Error";
+import { cookies } from "next/headers";
 
 export const revalidate = 0;
 const i18nNamespaces = ["default"];
@@ -34,6 +35,7 @@ export default async function MainLayout({
     return <Error />;
   }
 
+  const correctPassword = data?.data[0]?.attributes?.password;
   const orgName = data?.data[0]?.attributes?.name;
   const bannerData = data?.data[0]?.attributes?.banner;
   const logoData = data?.data[0]?.attributes?.logo;
@@ -45,6 +47,46 @@ export default async function MainLayout({
     secondary: data?.data[0]?.attributes?.accent_color,
     radius: data?.data[0]?.attributes?.border_radius,
   };
+
+  async function verifyPassword(formData: FormData) {
+    "use server";
+    try {
+      const password = formData.get("password") as string;
+      if (password === correctPassword) {
+        cookies().set("pw", password);
+      } else {
+        return { errors: "Password is incorrect." };
+      }
+      return password === correctPassword;
+    } catch (e) {
+      return { errors: "Password is incorrect." };
+    }
+  }
+  const auth = cookies().get("pw")?.value;
+
+  if (correctPassword !== null && auth !== correctPassword) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <div className="p-4 bg-white shadow-lg rounded-lg">
+          <h1 className="text-2xl font-bold text-center">
+            This site is password protected.
+          </h1>
+          <p className="text-center">Please enter the password to proceed.</p>
+          <form action={verifyPassword} className="mt-4">
+            <input
+              type="password"
+              name="password"
+              className="w-full p-2 border border-gray-300 rounded-md"
+              placeholder="Enter password"
+            />
+            <button className="w-full mt-4 p-2 bg-themePrimary text-white rounded-md">
+              Submit
+            </button>
+          </form>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <section>
