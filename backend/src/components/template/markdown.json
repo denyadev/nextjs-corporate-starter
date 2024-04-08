@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_template_markdowns",
+  "info": {
+    "displayName": "Markdown",
+    "icon": "underline"
+  },
+  "options": {},
+  "attributes": {
+    "text": {
+      "type": "blocks"
+    }
+  }
+}

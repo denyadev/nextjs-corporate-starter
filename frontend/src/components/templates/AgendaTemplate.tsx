@@ -2,53 +2,33 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import React, { useEffect, useState } from "react";
-import {
-  formatDate,
-  getStrapiMedia,
-  getStrapiURL,
-} from "../../utils/api-helpers";
+import React, { useState } from "react";
+import { formatDate, getStrapiMedia } from "../../utils/api-helpers";
 import Image from "next/image";
 import Link from "next/link";
 import { MapPinned, Volume2 } from "lucide-react";
-import { Separator } from "../ui/separator";
 
 export default function AgendaTemplate({ content }: { content: any }) {
-  const [selectedDate, setSelectedDate] = useState<string | null>(
-    content.template.sort(
-      (a: any, b: any) =>
-        new Date(a.Date).getTime() - new Date(b.Date).getTime()
-    )[0]?.Date
+  // Sort the content by date and then set the initial selected date to the first one
+  const sortedContent = content.sort(
+    (a: any, b: any) => new Date(a.Date).getTime() - new Date(b.Date).getTime()
   );
 
-  // State to hold the sorted agenda for the selected date
-  const [sortedAgenda, setSortedAgenda] = useState<any[]>([]);
+  const [selectedDate, setSelectedDate] = useState<string | null>(
+    sortedContent[0]?.Date
+  );
 
-  // Effect to update sortedAgenda whenever selectedDate changes
-  useEffect(() => {
-    if (selectedDate) {
-      const dayAgenda =
-        content.template.find((day: any) => day.Date === selectedDate)
-          ?.agenda || [];
-      const sortedByTime = dayAgenda.sort((a: any, b: any) =>
-        a.start_time.localeCompare(b.start_time)
-      );
-      setSortedAgenda(sortedByTime);
-    }
-  }, [selectedDate, content.template]);
+  // Filter and sort the agenda items for the selected date
+  const filteredAgenda =
+    sortedContent.find((item: any) => item.Date === selectedDate)?.agenda || [];
+  const sortedAgenda = filteredAgenda.sort((a: any, b: any) =>
+    a.start_time.localeCompare(b.start_time)
+  );
 
   return (
     <div>
-      <div className="pt-4">
-        <h1 className="heading tracking-tight underline underline-offset-2 decoration-themePrimary">
-          {content.heading}
-        </h1>
-        <h2 className="text-muted-foreground text-sm">{content.subheading}</h2>
-      </div>
-      <Separator className="mt-2 mb-4" />
-
       <div className="flex mb-4 flex-wrap">
-        {content.template.map((day: any, index: number) => (
+        {sortedContent.map((day: any, index: number) => (
           <Button
             key={index}
             onClick={() => setSelectedDate(day.Date)}

@@ -2,24 +2,14 @@
 import { getStrapiMedia } from "@/utils/api-helpers";
 import Image from "next/image";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
-import { Separator } from "../ui/separator";
 
 export default function GalleryTemplate({ content }: { content: any }) {
   return (
     <div>
-      <div className="pt-4">
-        <h1 className="heading tracking-tight underline underline-offset-2 decoration-themePrimary">
-          {content.heading}
-        </h1>
-        <h2 className="text-muted-foreground text-sm">{content.subheading}</h2>
-      </div>
-      <Separator className="mt-2 mb-4" />
-      {content.template[0].gallery.length === 0 && (
-        <div>Please upload some content!</div>
-      )}
+      {content.gallery.length === 0 && <div>Please upload some content!</div>}
       <ResponsiveMasonry columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}>
         <Masonry columnsCount={3} gutter="10px">
-          {content.template[0].gallery.map((image: any, index: number) => (
+          {content.gallery.map((image: any, index: number) => (
             <GalleryItem key={index} image={image} />
           ))}
         </Masonry>

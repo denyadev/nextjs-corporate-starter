@@ -1,20 +1,11 @@
-import { ScrollArea } from "@/components/ui/scroll-area";
 import { getStrapiMedia } from "@/utils/api-helpers";
 import Image from "next/image";
-import { Separator } from "../ui/separator";
 
 export default function SpeakersTemplate({ content }: { content: any }) {
   return (
     <div>
-      <div className="pt-4">
-        <h1 className="heading tracking-tight underline underline-offset-2 decoration-themePrimary">
-          {content.heading}
-        </h1>
-        <h2 className="text-muted-foreground text-sm">{content.subheading}</h2>
-      </div>
-      <Separator className="mt-2 mb-4" />
       <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-4">
-        {content.template[0].speaker.map((person: any, index: number) => (
+        {content.speaker.map((person: any, index: number) => (
           <div className="group relative block bg-black select-none min-h-[360px]">
             <Image
               src={getStrapiMedia(person.media.data.attributes.url) || "/"}

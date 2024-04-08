@@ -1,5 +1,6 @@
 import { templateRenderer } from "@/utils/template-renderer";
 import { getPageBySlug } from "@/utils/get-page-by-slug";
+import { Separator } from "@/components/ui/separator";
 
 export default async function PageRoute({
   params,
@@ -33,5 +34,16 @@ export default async function PageRoute({
     return <div>No content available</div>;
   }
 
-  return <div>{templateRenderer(page)}</div>;
+  return (
+    <div>
+      <div className="pt-4">
+        <h1 className="heading tracking-tight underline underline-offset-2 decoration-themePrimary">
+          {page.heading}
+        </h1>
+        <h2 className="text-muted-foreground text-sm">{page.subheading}</h2>
+      </div>
+      <Separator className="mt-2 mb-4" />
+      {templateRenderer(page)}
+    </div>
+  );
 }

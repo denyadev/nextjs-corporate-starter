@@ -505,7 +505,8 @@ export interface ApiPagePage extends Schema.CollectionType {
         'template.agenda',
         'template.sponsors',
         'template.documents',
-        'template.gallery'
+        'template.gallery',
+        'template.markdown'
       ]
     > &
       Attribute.SetPluginOptions<{

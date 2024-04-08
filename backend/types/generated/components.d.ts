@@ -119,6 +119,17 @@ export interface TemplateGallery extends Schema.Component {
   };
 }
 
+export interface TemplateMarkdown extends Schema.Component {
+  collectionName: 'components_template_markdowns';
+  info: {
+    displayName: 'Markdown';
+    icon: 'underline';
+  };
+  attributes: {
+    text: Attribute.Blocks;
+  };
+}
+
 export interface TemplateMarquee extends Schema.Component {
   collectionName: 'components_template_marquees';
   info: {
@@ -166,6 +177,7 @@ declare module '@strapi/types' {
       'template.agenda': TemplateAgenda;
       'template.documents': TemplateDocuments;
       'template.gallery': TemplateGallery;
+      'template.markdown': TemplateMarkdown;
       'template.marquee': TemplateMarquee;
       'template.speaker': TemplateSpeaker;
       'template.sponsors': TemplateSponsors;
