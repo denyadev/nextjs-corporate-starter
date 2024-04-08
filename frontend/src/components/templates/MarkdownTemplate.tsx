@@ -109,7 +109,7 @@ const renderContent = (note: any) => {
           alt={note.image.alternativeText || "image"}
           width={note.image.width}
           height={note.image.height}
-          className="my-2"
+          className="my-2 object-contain max-h-[300px] w-full"
         />
       );
 
