@@ -124,15 +124,15 @@ function AgendaItem({ item, index }: { item: any; index: number }) {
                   (locationItem: any, itemIndex: number) =>
                     locationItem.text !== "" ? (
                       <li key={itemIndex}>
-                        <Link href="/floor-plan">
-                          <Badge
-                            variant="secondary"
-                            className="gap-2 text-xs hover:border-l-4 hover:border-l-themePrimary"
-                          >
-                            <MapPinned className="flex-shrink-0 w-5 h-5 text-themePrimary" />
-                            {locationItem.text}
-                          </Badge>
-                        </Link>
+                        {/* <Link href="/floor-plan"> */}
+                        <Badge
+                          variant="secondary"
+                          className="gap-2 text-xs hover:border-l-4 hover:border-l-themePrimary"
+                        >
+                          <MapPinned className="flex-shrink-0 w-5 h-5 text-themePrimary" />
+                          {locationItem.text}
+                        </Badge>
+                        {/* </Link> */}
                       </li>
                     ) : null
                 )}
@@ -147,15 +147,15 @@ function AgendaItem({ item, index }: { item: any; index: number }) {
                   (speakerItem: any, itemIndex: number) =>
                     speakerItem.text !== "" ? (
                       <li key={itemIndex}>
-                        <Link href="/speakers">
-                          <Badge
-                            variant="secondary"
-                            className="gap-2 text-xs hover:border-l-4 hover:border-l-emerald-600"
-                          >
-                            <Volume2 className="flex-shrink-0 w-5 h-5 text-emerald-600" />
-                            {speakerItem.text}
-                          </Badge>
-                        </Link>
+                        {/* <Link href="/speakers"> */}
+                        <Badge
+                          variant="secondary"
+                          className="gap-2 text-xs hover:border-l-4 hover:border-l-emerald-600"
+                        >
+                          <Volume2 className="flex-shrink-0 w-5 h-5 text-emerald-600" />
+                          {speakerItem.text}
+                        </Badge>
+                        {/* </Link> */}
                       </li>
                     ) : null
                 )}
