@@ -1,5 +1,5 @@
 import "../globals.css";
-
+import { Analytics } from "@vercel/analytics/react";
 import { GeistSans } from "geist/font/sans";
 import type { Metadata } from "next";
 import i18nConfig from "../../../i18nConfig";
@@ -18,7 +18,10 @@ export default async function RootLayout({
 }) {
   return (
     <html lang={params.lang}>
-      <body className={`${GeistSans.className}`}>{children}</body>
+      <body className={`${GeistSans.className}`}>
+        {children}
+        <Analytics />
+      </body>
     </html>
   );
 }
