@@ -167,7 +167,7 @@ export const FloatingNav = ({
   useMotionValueEvent(scrollYProgress, "change", (current) => {
     if (typeof current === "number") {
       let previous = scrollYProgress.getPrevious();
-      setVisible(current <= 0.05 || current < previous); // Adjust visibility condition
+      setVisible(current <= 0.05 || current < previous!); // Adjust visibility condition
     }
   });
 
@@ -193,7 +193,7 @@ export const FloatingNav = ({
               href={navItem.link}
               className="flex items-center p-4 w-full hover:bg-gray-100 dark:hover:bg-gray-800"
             >
-              <span className="mr-3">{ShowIcon(navItem.icon)}</span>
+              <span className="mr-3">{ShowIcon(navItem.icon!)}</span>
               <span className="font-medium text-lg">{navItem.name}</span>
             </Link>
           ))}
@@ -244,7 +244,7 @@ export const FloatingNav = ({
             href={navItem.link}
             className="flex items-center space-x-1"
           >
-            {ShowIcon(navItem.icon)}
+            {ShowIcon(navItem.icon!)}
             {/* <span className="text-sm">{navItem.name}</span> */}
           </Link>
         ))}

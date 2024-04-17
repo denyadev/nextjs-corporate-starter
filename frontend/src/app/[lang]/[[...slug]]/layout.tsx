@@ -91,7 +91,7 @@ export default async function MainLayout({
     );
   }
 
-  const transformedTabs = pagesData.map((tab) => ({
+  const transformedTabs = pagesData.map((tab: any) => ({
     name: tab.attributes.tab_name,
     link: tab.attributes.url,
     icon: tab.attributes.icon,
