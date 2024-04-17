@@ -7,8 +7,10 @@ import Marquee from "@/components/Marquee";
 import { getStrapiURL } from "@/utils/api-helpers";
 import Error from "@/components/Error";
 import { cookies } from "next/headers";
+import { FloatingNav } from "@/components/ui/floating-navbar";
 
-export const revalidate = 0;
+export const dynamic = "force-dynamic";
+
 const i18nNamespaces = ["default"];
 
 export default async function MainLayout({
@@ -40,6 +42,7 @@ export default async function MainLayout({
   const bannerData = data?.data[0]?.attributes?.banner;
   const logoData = data?.data[0]?.attributes?.logo;
   const pagesData = data?.data[0]?.attributes?.pages?.data || [];
+  console.log(pagesData);
   const marqueeData = data?.data[0]?.attributes?.marquee;
   const localizationData = data?.data[0]?.attributes?.localizations;
   const themeData = {
@@ -88,6 +91,12 @@ export default async function MainLayout({
     );
   }
 
+  const transformedTabs = pagesData.map((tab) => ({
+    name: tab.attributes.tab_name,
+    link: tab.attributes.url,
+    icon: tab.attributes.icon,
+  }));
+
   return (
     <section>
       <TranslationsProvider
@@ -96,7 +105,13 @@ export default async function MainLayout({
         resources={resources}
       >
         <ThemeProvider theme={themeData}>
-          {/* {bannerData?.data && <Banner banner={bannerData} />} */}
+          {/* {bannerData?.data && <Banner banner={bannerData} />} */}{" "}
+          <div className="relative w-full h-full">
+            <FloatingNav
+              navItems={transformedTabs}
+              localization={localizationData}
+            />
+          </div>
           <Header
             logo={logoData}
             slug={slug[0]}

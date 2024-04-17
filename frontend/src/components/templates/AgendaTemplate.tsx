@@ -1,7 +1,6 @@
 "use client";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import React, { useState } from "react";
 import { formatDate, getStrapiMedia } from "../../utils/api-helpers";
 import Image from "next/image";
@@ -33,9 +32,9 @@ export default function AgendaTemplate({ content }: { content: any }) {
             key={index}
             onClick={() => setSelectedDate(day.Date)}
             variant="ghost"
-            className={`font-semibold text-sm py-6 px-6 rounded-none bg-white shadow ${
+            className={`font-semibold text-sm py-6 px-6 rounded-none bg-muted shadow ${
               selectedDate === day.Date
-                ? "border-b-2 text-black border-themePrimary bg-accent"
+                ? "border-b-2 text-secondary-foreground border-themePrimary bg-accent"
                 : "text-gray-500"
             }`}
           >
@@ -44,13 +43,13 @@ export default function AgendaTemplate({ content }: { content: any }) {
         ))}
       </div>
       {selectedDate && (
-        <Card className="p-2 md:p-4 divide-y">
+        <div className=" divide-y">
           {sortedAgenda.map((agenda: any, index: number) => (
             <div key={index} className="mb-4">
               <AgendaItem item={agenda} index={index} />
             </div>
           ))}
-        </Card>
+        </div>
       )}
     </div>
   );
@@ -68,13 +67,13 @@ function AgendaItem({ item, index }: { item: any; index: number }) {
 
   return (
     <div
-      className={`hover:bg-slate-50 p-3 w-full space-y-4 transition duration-200`}
+      className={`hover:bg-muted p-3 w-full space-y-4 transition duration-200`}
       onClick={toggleDescription}
     >
       <div className="flex flex-row justify-between">
         <div className="flex gap-4 min-w-0">
           <div>
-            <span className="border rounded-full w-7 h-7 items-center flex justify-center border-themePrimary">
+            <span className="border-2 rounded-full w-6 h-6 text-xs items-center flex justify-center border-themePrimary">
               {index + 1}
             </span>
           </div>
@@ -86,7 +85,7 @@ function AgendaItem({ item, index }: { item: any; index: number }) {
             <div className="text-sm text-gray-500">{item?.description}</div>
 
             {item?.notes && (
-              <div>
+              <div className="text-muted-foreground">
                 {item.notes.map((note: any, index: number) => (
                   <div key={index}>{renderContent(note)}</div>
                 ))}
@@ -96,27 +95,31 @@ function AgendaItem({ item, index }: { item: any; index: number }) {
         </div>
         <div className="flex flex-col md:flex-row gap-1">
           {item?.start_time && (
-            <Badge className="hover:bg-white shadow hover:text-black cursor-default min-w-max h-max bg-themePrimary">
-              <span className="font-medium text-xs">
-                {formatTime(item?.start_time)}
-              </span>
-            </Badge>
+            <div>
+              <Badge className="hover:bg-white shadow hover:text-black cursor-default min-w-max h-max bg-themePrimary ">
+                <span className="font-medium text-xs">
+                  {formatTime(item?.start_time)}
+                </span>
+              </Badge>
+            </div>
           )}
 
           {item?.start_time && item?.end_time && (
-            <Badge
-              variant="secondary"
-              className="hover:bg-white shadow hover:text-black cursor-default min-w-max h-max"
-            >
-              <span className="font-medium text-xs text-muted-foreground">
-                {formatTime(item?.end_time)}
-              </span>
-            </Badge>
+            <div>
+              <Badge
+                variant="secondary"
+                className="hover:bg-white shadow hover:text-black cursor-default min-w-max h-max"
+              >
+                <span className="font-medium text-xs text-muted-foreground">
+                  {formatTime(item?.end_time)}
+                </span>
+              </Badge>
+            </div>
           )}
         </div>
       </div>
       <div className="ml-12 flex flex-col space-y-1">
-        <div className="flex gap-1">
+        <div className="flex flex-col md:flex-row gap-1">
           {item.locations &&
             item.locations.map((locationList: any, listIndex: number) => (
               <ul key={listIndex} className="flex gap-1">
@@ -125,13 +128,15 @@ function AgendaItem({ item, index }: { item: any; index: number }) {
                     locationItem.text !== "" ? (
                       <li key={itemIndex}>
                         {/* <Link href="/floor-plan"> */}
-                        <Badge
-                          variant="secondary"
-                          className="gap-2 text-xs hover:border-l-4 hover:border-l-themePrimary"
-                        >
-                          <MapPinned className="flex-shrink-0 w-5 h-5 text-themePrimary" />
-                          {locationItem.text}
-                        </Badge>
+                        <div>
+                          <Badge
+                            variant="secondary"
+                            className="gap-2 text-xs hover:border-l-4 hover:border-l-themePrimary font-normal"
+                          >
+                            <MapPinned className="flex-shrink-0 w-4 h-4 text-themePrimary" />
+                            {locationItem.text}
+                          </Badge>
+                        </div>
                         {/* </Link> */}
                       </li>
                     ) : null
@@ -139,22 +144,24 @@ function AgendaItem({ item, index }: { item: any; index: number }) {
               </ul>
             ))}
         </div>
-        <div className="flex gap-1">
+        <div className="flex flex-col md:flex-row gap-1">
           {item.speakers &&
             item.speakers.map((speakerList: any, listIndex: number) => (
-              <ul key={listIndex}>
+              <ul key={listIndex} className="flex gap-1">
                 {speakerList.children.map(
                   (speakerItem: any, itemIndex: number) =>
                     speakerItem.text !== "" ? (
                       <li key={itemIndex}>
                         {/* <Link href="/speakers"> */}
-                        <Badge
-                          variant="secondary"
-                          className="gap-2 text-xs hover:border-l-4 hover:border-l-emerald-600"
-                        >
-                          <Volume2 className="flex-shrink-0 w-5 h-5 text-emerald-600" />
-                          {speakerItem.text}
-                        </Badge>
+                        <div>
+                          <Badge
+                            variant="secondary"
+                            className="gap-2 text-xs hover:border-l-4 hover:border-l-emerald-600 font-normal"
+                          >
+                            <Volume2 className="flex-shrink-0 w-4 h-4 text-emerald-600" />
+                            {speakerItem.text}
+                          </Badge>
+                        </div>
                         {/* </Link> */}
                       </li>
                     ) : null
@@ -197,20 +204,22 @@ function AgendaItem({ item, index }: { item: any; index: number }) {
                 rel="noopener noreferrer"
                 key={index}
               >
-                <Badge
-                  key={index}
-                  variant="secondary"
-                  className="gap-2 text-xs hover:bg-themePrimary hover:text-white"
-                >
-                  <Image
-                    src={iconPath}
-                    width={24}
-                    height={24}
-                    alt={file.ext.substring(1)}
-                    className="max-w-5 max-h-5 object-contain"
-                  />
-                  {file.name}
-                </Badge>
+                <div>
+                  <Badge
+                    key={index}
+                    variant="secondary"
+                    className="gap-2 text-xs hover:bg-themePrimary hover:text-white  font-normal"
+                  >
+                    <img
+                      src={iconPath}
+                      width={24}
+                      height={24}
+                      alt={file.ext.substring(1)}
+                      className="max-w-4 max-h-4 object-contain"
+                    />
+                    {file.name}
+                  </Badge>
+                </div>
               </Link>
             );
           })}

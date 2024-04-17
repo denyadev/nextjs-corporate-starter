@@ -154,17 +154,17 @@ export default function Header({
   const logoUrl = getStrapiMedia(logo?.data?.attributes?.url) || "";
 
   return (
-    <header className="flex bg-white w-full h-full shadow sticky top-0 z-50">
+    <header className="flex bg-card w-full h-full shadow sticky top-0 z-40 border-b">
       <div className="flex justify-between items-center w-full container mx-auto px-4 lg:px-0">
-        <div>
+        <div className="py-4 lg:py-0">
           {logo?.data?.attributes?.url ? (
             // <Link href={`/${slug}`} legacyBehavior passHref>
-            <Image
+            <img
               src={logoUrl}
               alt="logo"
               width={logo?.data?.attributes?.width}
               height={logo?.data?.attributes?.height}
-              className="max-h-20 object-contain cursor-pointer w-full"
+              className="object-contain cursor-pointer w-full"
             />
           ) : (
             // </Link>
@@ -172,7 +172,7 @@ export default function Header({
           )}
         </div>
 
-        <Sheet>
+        {/* <Sheet>
           <SheetTrigger className="lg:hidden">
             <NavigationMenu>
               <NavigationMenuList className="flex flex-col w-full gap-0 space-x-0">
@@ -273,8 +273,7 @@ export default function Header({
               </SheetDescription>
             </SheetHeader>
           </SheetContent>
-        </Sheet>
-
+        </Sheet> */}
         <NavigationMenu className="hidden lg:flex">
           <NavigationMenuList className="flex flex-col lg:flex-row space-x-0">
             {tabs?.map((tab: any) => (

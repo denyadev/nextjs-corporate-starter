@@ -545,7 +545,13 @@ export interface ApiPagePage extends Schema.CollectionType {
         'Bus',
         'Car',
         'Party',
-        'FolderLock'
+        'FolderLock',
+        'Newspaper',
+        'BadgeHelp',
+        'Star',
+        'MonitorPlay',
+        'Megaphone',
+        'Vote'
       ]
     > &
       Attribute.Required &

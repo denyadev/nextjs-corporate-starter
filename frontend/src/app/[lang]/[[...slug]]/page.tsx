@@ -1,6 +1,7 @@
 import { templateRenderer } from "@/utils/template-renderer";
 import { getPageBySlug } from "@/utils/get-page-by-slug";
 import { Separator } from "@/components/ui/separator";
+import { Card } from "@/components/ui/card";
 
 export default async function PageRoute({
   params,
@@ -35,15 +36,15 @@ export default async function PageRoute({
   }
 
   return (
-    <div>
-      <div className="pt-4">
-        <h1 className="heading tracking-tight underline underline-offset-2 decoration-themePrimary">
+    <Card className="p-4 mt-4">
+      <div>
+        <h1 className="heading text-secondary-foreground tracking-tight underline underline-offset-2 decoration-themePrimary">
           {page.heading}
         </h1>
         <h2 className="text-muted-foreground text-sm">{page.subheading}</h2>
       </div>
       <Separator className="mt-2 mb-4" />
       {templateRenderer(page)}
-    </div>
+    </Card>
   );
 }

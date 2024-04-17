@@ -95,7 +95,13 @@
         "Bus",
         "Car",
         "Party",
-        "FolderLock"
+        "FolderLock",
+        "Newspaper",
+        "BadgeHelp",
+        "Star",
+        "MonitorPlay",
+        "Megaphone",
+        "Vote"
       ],
       "required": true
     },
