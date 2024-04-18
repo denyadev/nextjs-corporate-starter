@@ -249,10 +249,10 @@ export const FloatingNav = ({
           </Link>
         ))}
         <button
-          className="border text-sm font-medium relative border-neutral-200 dark:border-white/[0.2] text-black dark:text-white px-4 py-4 rounded-full"
+          className="border text-sm font-medium relative border-neutral-200 dark:border-white/[0.2] text-black dark:text-white p-4 rounded-full"
           onClick={() => setMenuOpen(!menuOpen)}
         >
-          <HamburgerMenuIcon />
+          <HamburgerMenuIcon className="w-5 h-5" />
         </button>
       </motion.div>
     </AnimatePresence>
