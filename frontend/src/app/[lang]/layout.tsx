@@ -20,15 +20,15 @@ export default async function RootLayout({
   return (
     <html lang={params.lang}>
       <body className={`${GeistSans.className}`}>
-        <GlobalThemeProvider
+        {/* <GlobalThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
-        >
-          {children}
-          <Analytics />
-        </GlobalThemeProvider>
+        > */}
+        {children}
+        <Analytics />
+        {/* </GlobalThemeProvider> */}
         {/* Start of LiveChat code */}
         <script
           dangerouslySetInnerHTML={{

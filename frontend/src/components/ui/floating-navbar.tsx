@@ -197,7 +197,7 @@ export const FloatingNav = ({
               <span className="font-medium text-lg">{navItem.name}</span>
             </Link>
           ))}
-          <div
+          {/* <div
             className="w-full"
             onClick={() => setTheme(theme === "light" ? "dark" : "light")}
           >
@@ -209,7 +209,7 @@ export const FloatingNav = ({
                 {theme === "light" ? "Dark" : "Light"}
               </span>
             </div>
-          </div>
+          </div> */}
           {uniqueLocales.length > 0 && (
             <div
               className="w-full"
