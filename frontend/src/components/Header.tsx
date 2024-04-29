@@ -316,6 +316,7 @@ export default function Header({
                 </Link>
               </NavigationMenuItem>
             ))}
+
             {uniqueLocales.length > 0 && (
               <NavigationMenuItem
                 key={"language"}

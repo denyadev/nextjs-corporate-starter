@@ -32,12 +32,14 @@ import {
   Megaphone,
   MessageSquare,
   MonitorPlay,
+  MoonIcon,
   Newspaper,
   PartyPopper,
   Pin,
   Salad,
   Share2,
   Star,
+  SunIcon,
   UserRound,
   Volume2,
   Vote,
@@ -201,19 +203,23 @@ export const FloatingNav = ({
               <span className="font-medium text-lg">{navItem.name}</span>
             </Link>
           ))}
-          {/* <div
+          <div
             className="w-full"
             onClick={() => setTheme(theme === "light" ? "dark" : "light")}
           >
             <div className="flex items-center p-4 w-full hover:bg-gray-100 dark:hover:bg-gray-800">
               <span className="mr-3">
-                <Globe className="text-muted-foreground h-5 w-5" />
+                {theme === "light" ? (
+                  <SunIcon className="text-muted-foreground h-5 w-5" />
+                ) : (
+                  <MoonIcon className="text-muted-foreground h-5 w-5" />
+                )}
               </span>
               <span className="font-medium text-lg">
                 {theme === "light" ? "Dark" : "Light"}
               </span>
             </div>
-          </div> */}
+          </div>
           {uniqueLocales.length > 0 && (
             <div
               className="w-full"
