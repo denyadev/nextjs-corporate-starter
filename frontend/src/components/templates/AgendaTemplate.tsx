@@ -120,7 +120,7 @@ function AgendaItem({
     }
   };
 
-  const createGoogleCalendarUrl = (event, eventDate) => {
+  const createGoogleCalendarUrl = (event: any, eventDate: any) => {
     console.log(event); // Useful for debugging to see what data is being passed
 
     try {
