@@ -80,6 +80,7 @@ export interface ElementsSponsor extends Schema.Component {
     name: Attribute.String & Attribute.Required;
     description: Attribute.Text;
     media: Attribute.Media & Attribute.Required;
+    url: Attribute.String;
   };
 }
 

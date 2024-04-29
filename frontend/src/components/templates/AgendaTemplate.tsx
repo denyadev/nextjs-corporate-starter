@@ -24,6 +24,49 @@ export default function AgendaTemplate({ content }: { content: any }) {
     a.start_time.localeCompare(b.start_time)
   );
 
+  const createGoogleCalendarUrl = (event: any) => {
+    console.log(event); // Useful for debugging to see what data is being passed
+
+    try {
+      // Verify that the necessary data is available
+      if (!event.Date || !event.start_time || !event.end_time || !event.name) {
+        console.error("Missing required event fields.");
+        return null; // or return a default URL or error message
+      }
+
+      // Combine the date and time into full ISO strings
+      const startDateTime = new Date(`${event.Date}T${event.start_time}`)
+        .toISOString()
+        .replace(/-|:|\.\d\d\d/g, "");
+      const endDateTime = new Date(`${event.Date}T${event.end_time}`)
+        .toISOString()
+        .replace(/-|:|\.\d\d\d/g, "");
+
+      const details = encodeURIComponent(event.notes || "No details provided");
+      const location = encodeURIComponent(
+        event.locations || "No location provided"
+      );
+      const title = encodeURIComponent(event.name);
+      const url = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${startDateTime}/${endDateTime}&details=${details}&location=${location}`;
+      console.log(url); // Debugging to see the actual URL
+      return url;
+    } catch (error) {
+      console.error("Error creating Google Calendar URL:", error);
+      return null; // or return a default URL or error message
+    }
+  };
+
+  const testEvent = {
+    name: "Test Event",
+    Date: "2024-05-10",
+    start_time: "10:00:00",
+    end_time: "11:00:00",
+    notes: "Test Description",
+    locations: "Test Location",
+  };
+
+  console.log(createGoogleCalendarUrl(testEvent));
+
   return (
     <div>
       <div className="flex mb-4 flex-wrap">
@@ -46,7 +89,11 @@ export default function AgendaTemplate({ content }: { content: any }) {
         <div className=" divide-y">
           {sortedAgenda.map((agenda: any, index: number) => (
             <div key={index} className="mb-4">
-              <AgendaItem item={agenda} index={index} />
+              <AgendaItem
+                item={agenda}
+                index={index}
+                eventDate={selectedDate}
+              />
             </div>
           ))}
         </div>
@@ -55,13 +102,75 @@ export default function AgendaTemplate({ content }: { content: any }) {
   );
 }
 
-function AgendaItem({ item, index }: { item: any; index: number }) {
+function AgendaItem({
+  item,
+  index,
+  eventDate,
+}: {
+  item: any;
+  index: number;
+  eventDate: string | null;
+}) {
   const [isDescriptionVisible, setIsDescriptionVisible] = useState(false);
 
   const hasDescription = !!item.description;
   const toggleDescription = () => {
     if (hasDescription) {
       setIsDescriptionVisible(!isDescriptionVisible);
+    }
+  };
+
+  const createGoogleCalendarUrl = (event, eventDate) => {
+    console.log(event); // Useful for debugging to see what data is being passed
+
+    try {
+      // Check if 'Date' is passed separately and fallback to 'event.Date' if not
+      const eventDay = eventDate || event.Date;
+
+      // Verify that the necessary data is available
+      if (!eventDay || !event.start_time || !event.end_time || !event.name) {
+        console.error("Missing required event fields.");
+        return null; // or return a default URL or error message
+      }
+
+      // Combine the date and time into full ISO strings
+      const startDateTime = new Date(`${eventDay}T${event.start_time}`)
+        .toISOString()
+        .replace(/-|:|\.\d\d\d/g, "");
+      const endDateTime = new Date(`${eventDay}T${event.end_time}`)
+        .toISOString()
+        .replace(/-|:|\.\d\d\d/g, "");
+
+      const details = encodeURIComponent(
+        event.notes?.join("\n") || "No details provided"
+      );
+      const location = encodeURIComponent(
+        event.locations || "No location provided"
+      );
+      const title = encodeURIComponent(event.name);
+
+      return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${startDateTime}/${endDateTime}&details=${details}&location=${location}`;
+    } catch (error) {
+      console.error("Error creating Google Calendar URL:", error);
+      return null; // or return a default URL or error message
+    }
+  };
+
+  const calendarUrl = createGoogleCalendarUrl(item, eventDate);
+
+  const handleAddToCalendarClick = () => {
+    // Check if the calendar URL is generated
+    if (calendarUrl) {
+      const userConfirmed = window.confirm(
+        "Do you want to add this event to your calendar?"
+      );
+      if (userConfirmed) {
+        // Open the generated Google Calendar URL in a new tab
+        window.open(calendarUrl, "_blank");
+      }
+    } else {
+      // Log an error or show an error message to the user
+      console.error("The calendar URL is not available.");
     }
   };
 
@@ -93,6 +202,10 @@ function AgendaItem({ item, index }: { item: any; index: number }) {
             )}
           </div>
         </div>
+
+        <button onClick={handleAddToCalendarClick}>
+          Add to Google Calendar
+        </button>
         <div className="flex flex-col md:flex-row gap-1">
           {item?.start_time && (
             <div>
