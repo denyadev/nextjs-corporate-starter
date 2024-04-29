@@ -6,6 +6,7 @@ import { formatDate, getStrapiMedia } from "../../utils/api-helpers";
 import Image from "next/image";
 import Link from "next/link";
 import { MapPinned, Volume2 } from "lucide-react";
+import { createEvent } from "ics";
 
 export default function AgendaTemplate({ content }: { content: any }) {
   // Sort the content by date and then set the initial selected date to the first one
@@ -23,49 +24,6 @@ export default function AgendaTemplate({ content }: { content: any }) {
   const sortedAgenda = filteredAgenda.sort((a: any, b: any) =>
     a.start_time.localeCompare(b.start_time)
   );
-
-  const createGoogleCalendarUrl = (event: any) => {
-    console.log(event); // Useful for debugging to see what data is being passed
-
-    try {
-      // Verify that the necessary data is available
-      if (!event.Date || !event.start_time || !event.end_time || !event.name) {
-        console.error("Missing required event fields.");
-        return null; // or return a default URL or error message
-      }
-
-      // Combine the date and time into full ISO strings
-      const startDateTime = new Date(`${event.Date}T${event.start_time}`)
-        .toISOString()
-        .replace(/-|:|\.\d\d\d/g, "");
-      const endDateTime = new Date(`${event.Date}T${event.end_time}`)
-        .toISOString()
-        .replace(/-|:|\.\d\d\d/g, "");
-
-      const details = encodeURIComponent(event.notes || "No details provided");
-      const location = encodeURIComponent(
-        event.locations || "No location provided"
-      );
-      const title = encodeURIComponent(event.name);
-      const url = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${startDateTime}/${endDateTime}&details=${details}&location=${location}`;
-      console.log(url); // Debugging to see the actual URL
-      return url;
-    } catch (error) {
-      console.error("Error creating Google Calendar URL:", error);
-      return null; // or return a default URL or error message
-    }
-  };
-
-  const testEvent = {
-    name: "Test Event",
-    Date: "2024-05-10",
-    start_time: "10:00:00",
-    end_time: "11:00:00",
-    notes: "Test Description",
-    locations: "Test Location",
-  };
-
-  console.log(createGoogleCalendarUrl(testEvent));
 
   return (
     <div>
@@ -120,59 +78,42 @@ function AgendaItem({
     }
   };
 
-  const createGoogleCalendarUrl = (event: any, eventDate: any) => {
-    console.log(event); // Useful for debugging to see what data is being passed
+  async function handleDownload(item, eventDate) {
+    console.log(":::", item, eventDate);
+    // const startTime = eventDate
+    //   .split("-")
+    //   .concat(item.start_time.split(":"))
+    //   .map(Number);
+    // const endTime = eventDate
+    //   .split("-")
+    //   .concat(item.end_time.split(":"))
+    //   .map(Number);
 
-    try {
-      // Check if 'Date' is passed separately and fallback to 'event.Date' if not
-      const eventDay = eventDate || event.Date;
+    // const event = {
+    //   start: startTime,
+    //   end: endTime,
+    //   title: item.name,
+    //   description: item.notes?.join("\n") || "No details provided",
+    //   location: item.locations || "No location provided",
+    // };
 
-      // Verify that the necessary data is available
-      if (!eventDay || !event.start_time || !event.end_time || !event.name) {
-        console.error("Missing required event fields.");
-        return null; // or return a default URL or error message
-      }
+    // createEvent(event, (error, value) => {
+    //   if (error) {
+    //     console.error("Error creating ICS:", error);
+    //     return;
+    //   }
 
-      // Combine the date and time into full ISO strings
-      const startDateTime = new Date(`${eventDay}T${event.start_time}`)
-        .toISOString()
-        .replace(/-|:|\.\d\d\d/g, "");
-      const endDateTime = new Date(`${eventDay}T${event.end_time}`)
-        .toISOString()
-        .replace(/-|:|\.\d\d\d/g, "");
-
-      const details = encodeURIComponent(
-        event.notes?.join("\n") || "No details provided"
-      );
-      const location = encodeURIComponent(
-        event.locations || "No location provided"
-      );
-      const title = encodeURIComponent(event.name);
-
-      return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${startDateTime}/${endDateTime}&details=${details}&location=${location}`;
-    } catch (error) {
-      console.error("Error creating Google Calendar URL:", error);
-      return null; // or return a default URL or error message
-    }
-  };
-
-  const calendarUrl = createGoogleCalendarUrl(item, eventDate);
-
-  const handleAddToCalendarClick = () => {
-    // Check if the calendar URL is generated
-    if (calendarUrl) {
-      const userConfirmed = window.confirm(
-        "Do you want to add this event to your calendar?"
-      );
-      if (userConfirmed) {
-        // Open the generated Google Calendar URL in a new tab
-        window.open(calendarUrl, "_blank");
-      }
-    } else {
-      // Log an error or show an error message to the user
-      console.error("The calendar URL is not available.");
-    }
-  };
+    //   const blob = new Blob([value], { type: "text/calendar;charset=utf-8" });
+    //   const url = window.URL.createObjectURL(blob);
+    //   const a = document.createElement("a");
+    //   a.href = url;
+    //   a.download = `${item.name.replace(/[^a-zA-Z ]/g, "")}.ics`; // Remove special characters from filename
+    //   document.body.appendChild(a);
+    //   a.click();
+    //   document.body.removeChild(a);
+    //   window.URL.revokeObjectURL(url);
+    // });
+  }
 
   return (
     <div
@@ -203,8 +144,8 @@ function AgendaItem({
           </div>
         </div>
 
-        <button onClick={handleAddToCalendarClick}>
-          Add to Google Calendar
+        <button onClick={() => handleDownload(item, eventDate)}>
+          Download ICS File
         </button>
         <div className="flex flex-col md:flex-row gap-1">
           {item?.start_time && (
