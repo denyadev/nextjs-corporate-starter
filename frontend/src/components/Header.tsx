@@ -180,7 +180,7 @@ export default function Header({
               alt="logo"
               width={logo?.data?.attributes?.width}
               height={logo?.data?.attributes?.height}
-              className="object-contain cursor-pointer w-full"
+              className="object-contain cursor-pointer w-full max-h-16"
             />
           ) : (
             // </Link>
