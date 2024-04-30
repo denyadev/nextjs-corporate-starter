@@ -19,6 +19,7 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer";
 import { renderContent } from "@/utils/rich-text-renderer";
+import { ScrollArea } from "../ui/scroll-area";
 
 export default function SpeakersTemplate({ content }: { content: any }) {
   return (
@@ -31,6 +32,7 @@ export default function SpeakersTemplate({ content }: { content: any }) {
               imageWidth={person.media.data.attributes.width}
               imageHeight={person.media.data.attributes.height}
               className="h-64 cursor-pointer"
+              imageClassName="object-cover p-0"
             >
               <p className="text-sm font-bold uppercase tracking-widest text-themeAccent">
                 {person.title}
@@ -80,15 +82,17 @@ export function SpeakerDialog({
                 {person.name}
               </p>
             </DialogTitle>
-            <DialogDescription>
-              {person?.bio && (
-                <div className="text-muted-foreground">
-                  {person.bio.map((bio: any, index: number) => (
-                    <div key={index}>{renderContent(bio)}</div>
-                  ))}
-                </div>
-              )}
-            </DialogDescription>
+            <ScrollArea className="max-h-[500px]">
+              <DialogDescription>
+                {person?.bio && (
+                  <div className="text-muted-foreground">
+                    {person.bio.map((bio: any, index: number) => (
+                      <div key={index}>{renderContent(bio)}</div>
+                    ))}
+                  </div>
+                )}
+              </DialogDescription>
+            </ScrollArea>
           </DialogHeader>
         </DialogContent>
       </Dialog>
@@ -108,15 +112,17 @@ export function SpeakerDialog({
               {person.name}
             </p>
           </DrawerTitle>
-          <DrawerDescription>
-            {person?.bio && (
-              <div className="text-muted-foreground">
-                {person.bio.map((bio: any, index: number) => (
-                  <div key={index}>{renderContent(bio)}</div>
-                ))}
-              </div>
-            )}
-          </DrawerDescription>
+          <ScrollArea className="max-h-[500px]">
+            <DrawerDescription>
+              {person?.bio && (
+                <div className="text-muted-foreground">
+                  {person.bio.map((bio: any, index: number) => (
+                    <div key={index}>{renderContent(bio)}</div>
+                  ))}
+                </div>
+              )}
+            </DrawerDescription>
+          </ScrollArea>
         </DrawerHeader>
       </DrawerContent>
     </Drawer>

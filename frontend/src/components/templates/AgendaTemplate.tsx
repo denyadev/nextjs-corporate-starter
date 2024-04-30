@@ -3,15 +3,8 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import React, { useState } from "react";
 import { formatDate, getStrapiMedia } from "../../utils/api-helpers";
-import Image from "next/image";
 import Link from "next/link";
-import {
-  CalendarIcon,
-  MapPinned,
-  PlusCircleIcon,
-  PlusIcon,
-  Volume2,
-} from "lucide-react";
+import { MapPinned, PlusCircleIcon, Volume2 } from "lucide-react";
 import { createEvent } from "ics";
 import { renderContent } from "@/utils/rich-text-renderer";
 
