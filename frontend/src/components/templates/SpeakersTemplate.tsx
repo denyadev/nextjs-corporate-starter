@@ -78,9 +78,7 @@ export function SpeakerDialog({
                 {person.title}
               </p>
 
-              <p className="text-lg font-bold text-muted-foreground sm:text-xl">
-                {person.name}
-              </p>
+              <p className="text-lg font-bold sm:text-xl">{person.name}</p>
             </DialogTitle>
             <ScrollArea className="max-h-[500px]">
               <DialogDescription>
@@ -108,9 +106,7 @@ export function SpeakerDialog({
             <p className="text-sm font-medium uppercase tracking-widest text-themePrimary">
               {person.title}
             </p>
-            <p className="text-lg font-bold text-muted-foreground sm:text-xl">
-              {person.name}
-            </p>
+            <p className="text-lg font-bold sm:text-xl">{person.name}</p>
           </DrawerTitle>
           <ScrollArea className="max-h-[500px]">
             <DrawerDescription>

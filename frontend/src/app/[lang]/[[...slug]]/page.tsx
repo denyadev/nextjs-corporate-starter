@@ -37,13 +37,13 @@ export default async function PageRoute({
 
   return (
     <Card className="p-4">
-      <div>
-        <h1 className="heading text-secondary-foreground tracking-tight underline underline-offset-2 decoration-themePrimary">
+      <div className="mb-4 text-center">
+        <h1 className="heading text-secondary-foreground tracking-tight underline underline-offset-2 decoration-themeAccent">
           {page.heading}
         </h1>
-        <h2 className="text-muted-foreground text-sm">{page.subheading}</h2>
+        <h2 className="text-muted-foreground text-base">{page.subheading}</h2>
       </div>
-      <Separator className="mt-2 mb-4" />
+      {/* <Separator className="mt-2 mb-4" /> */}
       {templateRenderer(page)}
     </Card>
   );

@@ -39,12 +39,14 @@ import {
   Megaphone,
   MessageSquare,
   MonitorPlay,
+  MoonIcon,
   Newspaper,
   PartyPopper,
   Pin,
   Salad,
   Share2,
   Star,
+  SunIcon,
   UserRound,
   Volume2,
   Vote,
@@ -55,6 +57,8 @@ import { Separator } from "@/components/ui/separator";
 import { useTranslation } from "react-i18next";
 import i18nConfig from "../../i18nConfig";
 import { getStrapiMedia } from "@/utils/api-helpers";
+import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
 
 type IconMap = {
   [key: string]: JSX.Element;
@@ -130,6 +134,14 @@ export default function Header({
   const currentLocale = i18n.language;
   const router = useRouter();
   const uniqueLocales = getUniqueLocales(localization?.data);
+  const { theme, setTheme } = useTheme();
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  if (!isClient) return null;
 
   const normalizePathname = (path: string) => {
     const locales = ["en", "fr"]; // List of supported locales
@@ -214,6 +226,26 @@ export default function Header({
               </NavigationMenuItem>
             ))}
 
+            <NavigationMenuItem
+              key={"language"}
+              className="w-full"
+              onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+            >
+              <NavigationMenuLink
+                className={`${navigationMenuTriggerStyle()} border-b-2 rounded-none lg:py-5 h-full w-full bg-accent cursor-pointer`}
+              >
+                <div className="flex flex-col w-12 justify-center items-center gap-1">
+                  {theme === "light" ? (
+                    <SunIcon className="text-muted-foreground h-5 w-5" />
+                  ) : (
+                    <MoonIcon className="text-muted-foreground h-5 w-5" />
+                  )}
+                  <span className="font-medium text-xs text-center">
+                    {theme === "dark" ? "Dark" : "Light"}
+                  </span>
+                </div>
+              </NavigationMenuLink>
+            </NavigationMenuItem>
             {uniqueLocales.length > 0 && (
               <NavigationMenuItem
                 key={"language"}

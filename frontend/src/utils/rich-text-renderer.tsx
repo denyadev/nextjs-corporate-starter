@@ -2,7 +2,7 @@ import Image from "next/image";
 import { getStrapiMedia } from "./api-helpers";
 
 export const renderText = (textNode: any) => {
-  const baseStyle = "inline text-xs";
+  const baseStyle = "inline text-sm";
   let extraStyle = "";
 
   if (textNode.bold) {

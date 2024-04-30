@@ -63,9 +63,9 @@
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 0, 0%, 18%;
-    --input: 0, 0%, 18%;
-    --ring: 0, 0%, 18%;
+    --border: 0, 0%, 20%;
+    --input: 0, 0%, 28%;
+    --ring: 0, 0%, 28%;
   }
 }
 
@@ -78,7 +78,7 @@
   }
 
   .heading {
-    @apply text-2xl font-bold text-gray-700 tracking-tight;
+    @apply text-3xl font-bold text-gray-700 tracking-tight;
   }
 
   /* width */

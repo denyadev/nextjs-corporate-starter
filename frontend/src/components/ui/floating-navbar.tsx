@@ -224,7 +224,7 @@ export const FloatingNav = ({
                 )}
               </span>
               <span className="font-medium text-base">
-                Theme: {theme === "light" ? "Dark" : "Light"}
+                Theme: {theme === "dark" ? "Dark" : "Light"}
               </span>
             </div>
           </div>
