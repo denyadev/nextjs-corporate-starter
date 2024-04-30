@@ -1,6 +1,6 @@
 export default function EmbedTemplate({ content }: { content: any }) {
   return (
-    <div className="">
+    <div>
       <iframe
         src={content.url}
         style={{ width: "100%", height: "90vh", border: "none" }}

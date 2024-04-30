@@ -42,7 +42,7 @@ export default async function MainLayout({
   const bannerData = data?.data[0]?.attributes?.banner;
   const logoData = data?.data[0]?.attributes?.logo;
   const pagesData = data?.data[0]?.attributes?.pages?.data || [];
-  console.log(pagesData);
+  // console.log(pagesData);
   const marqueeData = data?.data[0]?.attributes?.marquee;
   const localizationData = data?.data[0]?.attributes?.localizations;
   const themeData = {

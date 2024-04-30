@@ -227,7 +227,7 @@ export default function Header({
             ))}
 
             <NavigationMenuItem
-              key={"language"}
+              key={"theme"}
               className="w-full"
               onClick={() => setTheme(theme === "light" ? "dark" : "light")}
             >

@@ -1,5 +1,4 @@
 "use client";
-import { Card } from "@/components/ui/card";
 import { getStrapiMedia } from "../../utils/api-helpers";
 import Image from "next/image";
 
@@ -7,11 +6,11 @@ export default function MarkdownTemplate({ content }: { content: any }) {
   return (
     <div>
       {content?.text && (
-        <Card className="p-2 md:p-4">
+        <div>
           {content.text.map((note: any, index: number) => (
             <div key={index}>{renderContent(note)}</div>
           ))}
-        </Card>
+        </div>
       )}
     </div>
   );

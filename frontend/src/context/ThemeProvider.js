@@ -2,7 +2,6 @@
 import { useEffect } from "react";
 
 const setThemeColors = (theme) => {
-  console.log(theme);
   const primary = theme?.primary || "#007bff";
   const secondary = theme?.secondary || "#6c757d";
   const radius = theme?.radius || "0.25rem";
