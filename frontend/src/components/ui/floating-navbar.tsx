@@ -48,6 +48,8 @@ import { usePathname, useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
 import i18nConfig from "../../../i18nConfig";
 import { useTheme } from "next-themes";
+import Banner from "../Banner";
+import { Separator } from "./separator";
 
 type IconMap = {
   [key: string]: JSX.Element;
@@ -109,6 +111,7 @@ function getUniqueLocales(dataArray: any) {
 
 export const FloatingNav = ({
   navItems,
+  bannerData,
   localization,
   className,
 }: {
@@ -117,6 +120,7 @@ export const FloatingNav = ({
     link: string;
     icon?: string; // Changed to string to match the ShowIcon function
   }[];
+  bannerData: any;
   localization: any;
   className?: string;
 }) => {
@@ -191,23 +195,27 @@ export const FloatingNav = ({
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: -100, opacity: 0 }}
           transition={{ duration: 0.2 }}
-          className="flex flex-col items-center fixed inset-x-0 top-0 bg-white dark:bg-black shadow-md h-screen z-50"
+          className="flex flex-col items-center fixed inset-x-0 top-0 bg-accent dark:bg-black shadow-md h-screen z-50 container mx-auto"
         >
+          <div>
+            <Banner banner={bannerData} />
+          </div>
           {navItems.map((navItem, idx) => (
             <Link
               key={idx}
               href={navItem.link}
-              className="flex items-center p-4 w-full hover:bg-gray-100 dark:hover:bg-gray-800"
+              className="flex items-center p-3 w-full hover:bg-gray-100 dark:hover:bg-gray-800"
             >
               <span className="mr-3">{ShowIcon(navItem.icon!)}</span>
-              <span className="font-medium text-lg">{navItem.name}</span>
+              <span className="font-medium text-base">{navItem.name}</span>
             </Link>
           ))}
+          <Separator className="my-2" />
           <div
             className="w-full"
             onClick={() => setTheme(theme === "light" ? "dark" : "light")}
           >
-            <div className="flex items-center p-4 w-full hover:bg-gray-100 dark:hover:bg-gray-800">
+            <div className="flex items-center p-3 w-full hover:bg-gray-100 dark:hover:bg-gray-800">
               <span className="mr-3">
                 {theme === "light" ? (
                   <SunIcon className="text-muted-foreground h-5 w-5" />
@@ -215,8 +223,8 @@ export const FloatingNav = ({
                   <MoonIcon className="text-muted-foreground h-5 w-5" />
                 )}
               </span>
-              <span className="font-medium text-lg">
-                {theme === "light" ? "Dark" : "Light"}
+              <span className="font-medium text-base">
+                Theme: {theme === "light" ? "Dark" : "Light"}
               </span>
             </div>
           </div>
@@ -227,12 +235,12 @@ export const FloatingNav = ({
                 toggleLanguage(currentLocale === "en" ? "fr" : "en")
               }
             >
-              <div className="flex items-center p-4 w-full hover:bg-gray-100 dark:hover:bg-gray-800">
+              <div className="flex items-center p-3 w-full hover:bg-gray-100 dark:hover:bg-gray-800">
                 <span className="mr-3">
                   <Globe className="text-muted-foreground h-5 w-5" />
                 </span>
-                <span className="font-medium text-lg">
-                  {currentLocale.toUpperCase()}
+                <span className="font-medium text-base">
+                  Language: {currentLocale.toUpperCase()}
                 </span>
               </div>
             </div>

@@ -110,6 +110,7 @@ export default async function MainLayout({
             <FloatingNav
               navItems={transformedTabs}
               localization={localizationData}
+              bannerData={bannerData}
             />
           </div>
           <div className="container mx-auto px-4 mb-4 lg:px-0">
