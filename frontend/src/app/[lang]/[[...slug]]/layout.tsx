@@ -112,18 +112,18 @@ export default async function MainLayout({
               localization={localizationData}
             />
           </div>
-          <Header
-            logo={logoData}
-            slug={slug[0]}
-            tabs={pagesData}
-            localization={localizationData}
-          />
-          <div className="container mx-auto px-4 lg:px-0 pb-8 mt-2">
-            {marqueeData && marqueeData.length > 0 && (
-              <Marquee marquee={marqueeData} />
-            )}
+          <div className="container mx-auto px-4 mb-4 lg:px-0">
             {slug.length > 0 && bannerData?.data && (
               <Banner banner={bannerData} />
+            )}
+            <Header
+              logo={logoData}
+              slug={slug[0]}
+              tabs={pagesData}
+              localization={localizationData}
+            />
+            {marqueeData && marqueeData.length > 0 && (
+              <Marquee marquee={marqueeData} />
             )}
             {slug.length === 1 && data?.data[0] && (
               <div className="mt-4">

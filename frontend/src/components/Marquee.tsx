@@ -5,7 +5,7 @@ import MarqueeComponent from "react-fast-marquee";
 
 export default function Marquee({ marquee }: { marquee: any }) {
   return (
-    <MarqueeComponent className="pb-2" autoFill speed={20} gradient={false}>
+    <MarqueeComponent className="py-4" autoFill speed={20} gradient={false}>
       {marquee.map((item: any, index: number) => (
         <div key={index}>
           {item.marquee_text &&

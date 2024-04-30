@@ -93,7 +93,7 @@
 
   /* Handle */
   ::-webkit-scrollbar-thumb {
-    @apply bg-themePrimary rounded-lg;
+    @apply bg-themePrimary rounded-sm;
   }
 
   /* Handle on hover */

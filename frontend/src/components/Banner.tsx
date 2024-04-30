@@ -11,7 +11,7 @@ export default function Banner({ banner }: { banner: any }) {
         alt="banner"
         width={banner?.data?.attributes?.width}
         height={banner?.data?.attributes?.height}
-        className="object-cover w-full h-[160px] md:h-[240px] rounded-lg overflow-hidden"
+        className="object-contain w-full h-[160px] md:h-[240px] rounded-lg overflow-hidden"
       />
     </div>
   );

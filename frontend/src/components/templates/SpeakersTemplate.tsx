@@ -1,8 +1,7 @@
 "use client";
 import { getStrapiMedia } from "@/utils/api-helpers";
-import Image from "next/image";
 import * as React from "react";
-import { Button } from "@/components/ui/button";
+import { DirectionAwareHover } from "../ui/direction-aware-hover";
 import {
   Dialog,
   DialogContent,
@@ -19,39 +18,36 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
+import { renderContent } from "@/utils/rich-text-renderer";
 
 export default function SpeakersTemplate({ content }: { content: any }) {
   return (
-    <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-4 cursor-pointer">
+    <div className="relative grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
       {content.speaker.map((person: any, index: number) => (
         <SpeakerDialog person={person}>
-          <div className="group relative block bg-black select-none min-h-[260px]">
-            <Image
-              src={getStrapiMedia(person.media.data.attributes.url) || "/"}
-              width={person.media.data.attributes.width}
-              height={person.media.data.attributes.height}
-              alt={person.name}
-              className="absolute inset-0 h-full w-full object-contain opacity-75 transition-opacity group-hover:opacity-50"
-            />
-
-            <div className="relative p-4 sm:p-6 lg:p-8">
-              <p className="text-sm font-medium uppercase tracking-widest text-themePrimary">
+          <div>
+            <DirectionAwareHover
+              imageUrl={getStrapiMedia(person.media.data.attributes.url) || "/"}
+              imageWidth={person.media.data.attributes.width}
+              imageHeight={person.media.data.attributes.height}
+              className="h-64 cursor-pointer"
+            >
+              <p className="text-sm font-bold uppercase tracking-widest text-themeAccent">
                 {person.title}
               </p>
+              <p className="font-bold text-xl">{person.name}</p>
 
-              <p className="text-lg font-bold text-white sm:text-xl">
-                {person.name}
-              </p>
-
-              <div className="mt-12">
-                <div className="translate-y-8 transform opacity-0 transition-all group-hover:translate-y-0 group-hover:opacity-100 space-y-4">
-                  <p className="text-sm text-white line-clamp-3">
-                    {person.bio}
-                  </p>
-                  <p className="font-bold text-primary">Read More...</p>
-                </div>
+              <div className="space-y-2">
+                {person?.bio && (
+                  <div className="hidden sm:line-clamp-2">
+                    {person.bio.map((bio: any, index: number) => (
+                      <div key={index}>{renderContent(bio)}</div>
+                    ))}
+                  </div>
+                )}
+                <p className="font-bold text-themePrimary">Read Bio...</p>
               </div>
-            </div>
+            </DirectionAwareHover>
           </div>
         </SpeakerDialog>
       ))}
@@ -73,7 +69,7 @@ export function SpeakerDialog({
     return (
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>{children}</DialogTrigger>
-        <DialogContent className="sm:max-w-[425px]">
+        <DialogContent className="sm:max-w-[600px]">
           <DialogHeader>
             <DialogTitle>
               <p className="text-sm font-medium uppercase tracking-widest text-themePrimary">
@@ -84,7 +80,15 @@ export function SpeakerDialog({
                 {person.name}
               </p>
             </DialogTitle>
-            <DialogDescription>{person.bio}</DialogDescription>
+            <DialogDescription>
+              {person?.bio && (
+                <div className="text-muted-foreground">
+                  {person.bio.map((bio: any, index: number) => (
+                    <div key={index}>{renderContent(bio)}</div>
+                  ))}
+                </div>
+              )}
+            </DialogDescription>
           </DialogHeader>
         </DialogContent>
       </Dialog>
@@ -94,8 +98,8 @@ export function SpeakerDialog({
   return (
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>{children}</DrawerTrigger>
-      <DrawerContent className="pb-32">
-        <DrawerHeader className="text-left ">
+      <DrawerContent className="pb-24">
+        <DrawerHeader className="text-left">
           <DrawerTitle>
             <p className="text-sm font-medium uppercase tracking-widest text-themePrimary">
               {person.title}
@@ -104,7 +108,15 @@ export function SpeakerDialog({
               {person.name}
             </p>
           </DrawerTitle>
-          <DrawerDescription>{person.bio}</DrawerDescription>
+          <DrawerDescription>
+            {person?.bio && (
+              <div className="text-muted-foreground">
+                {person.bio.map((bio: any, index: number) => (
+                  <div key={index}>{renderContent(bio)}</div>
+                ))}
+              </div>
+            )}
+          </DrawerDescription>
         </DrawerHeader>
       </DrawerContent>
     </Drawer>

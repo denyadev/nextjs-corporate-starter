@@ -170,7 +170,7 @@ export default function Header({
   const logoUrl = getStrapiMedia(logo?.data?.attributes?.url) || "";
 
   return (
-    <header className="flex bg-card w-full h-full shadow sticky top-0 z-40 border-b">
+    <header className="flex bg-card w-full h-full  sticky top-0 z-40 shadow-md rounded-sm">
       <div className="flex justify-between items-center w-full container mx-auto px-4 lg:px-0">
         <div className="py-4 lg:py-0">
           {logo?.data?.attributes?.url ? (
@@ -187,109 +187,6 @@ export default function Header({
             <div>Logo Goes Here</div>
           )}
         </div>
-
-        {/* <Sheet>
-          <SheetTrigger className="lg:hidden">
-            <NavigationMenu>
-              <NavigationMenuList className="flex flex-col w-full gap-0 space-x-0">
-                <NavigationMenuItem key={"language"} className="w-full">
-                  <NavigationMenuLink
-                    className={`${navigationMenuTriggerStyle()} border-b-2 rounded-none py-4 h-full w-full bg-accent cursor-pointer`}
-                  >
-                    <div className="flex flex-col items-center gap-1 w-4">
-                      <HamburgerMenuIcon className="w-4 h-4" />
-                      <span className="font-medium text-xs text-center">
-                        Menu
-                      </span>
-                    </div>
-                  </NavigationMenuLink>
-                </NavigationMenuItem>
-              </NavigationMenuList>
-            </NavigationMenu>
-          </SheetTrigger>
-          <SheetContent className="w-full">
-            <SheetHeader>
-              <SheetTitle>
-                <div>
-                  {logo?.data?.attributes?.url ? (
-                    // <Link href={`/${slug}`} legacyBehavior passHref>
-                    <Image
-                      src={logoUrl}
-                      alt="logo"
-                      width={logo?.data?.attributes?.width}
-                      height={logo?.data?.attributes?.height}
-                      className="max-h-20 object-contain cursor-pointer max-w-64"
-                    />
-                  ) : (
-                    // </Link>
-                    <div>Logo Goes Here</div>
-                  )}
-                </div>
-              </SheetTitle>
-              <SheetDescription className="w-full">
-                <NavigationMenu className="w-full">
-                  <NavigationMenuList className="flex flex-col w-full gap-0 space-x-0">
-                    {tabs?.map((tab: any) => (
-                      <NavigationMenuItem
-                        key={tab.attributes.url}
-                        className="flex items-start justify-start w-full"
-                      >
-                        <Link
-                          href={`/${slug}/${tab.attributes.url}`}
-                          legacyBehavior
-                          passHref
-                        >
-                          <NavigationMenuLink
-                            className={`${navigationMenuTriggerStyle()} border-l-2 rounded-none py-4 h-full w-full ${
-                              normalizePathname(pathname) ===
-                              `/${tab.attributes.url}`
-                                ? "border-themePrimary bg-accent"
-                                : ""
-                            }`}
-                          >
-                            <SheetClose asChild>
-                              <div className="flex items-center gap-2 w-full">
-                                {ShowIcon(tab.attributes.icon)}
-                                <span className="font-medium text-xs">
-                                  {tab.attributes.tab_name}
-                                </span>
-                              </div>
-                            </SheetClose>
-                          </NavigationMenuLink>
-                        </Link>
-                      </NavigationMenuItem>
-                    ))}
-                    {uniqueLocales.length > 0 && (
-                      <>
-                        <Separator className="my-1" />
-                        <NavigationMenuItem
-                          key={"language"}
-                          className="flex w-full"
-                        >
-                          <NavigationMenuLink
-                            className={`${navigationMenuTriggerStyle()}  border-l-2 rounded-none py-4 h-full w-full bg-accent cursor-pointer`}
-                            onClick={() =>
-                              toggleLanguage(
-                                currentLocale === "en" ? "fr" : "en"
-                              )
-                            }
-                          >
-                            <div className="flex items-center gap-2 w-full">
-                              <Globe className="w-4 h-4" />
-                              <span className="font-medium text-xs ">
-                                {currentLocale.toUpperCase()}
-                              </span>
-                            </div>
-                          </NavigationMenuLink>
-                        </NavigationMenuItem>
-                      </>
-                    )}
-                  </NavigationMenuList>
-                </NavigationMenu>
-              </SheetDescription>
-            </SheetHeader>
-          </SheetContent>
-        </Sheet> */}
         <NavigationMenu className="hidden lg:flex">
           <NavigationMenuList className="flex flex-col lg:flex-row space-x-0">
             {tabs?.map((tab: any) => (
@@ -300,13 +197,13 @@ export default function Header({
                   passHref
                 >
                   <NavigationMenuLink
-                    className={`${navigationMenuTriggerStyle()} border-b-2 rounded-none lg:py-8 h-full w-full ${
+                    className={`${navigationMenuTriggerStyle()} rounded-none lg:py-5 h-full w-full hover:border-b-2 ${
                       normalizePathname(pathname) === `/${tab.attributes.url}`
-                        ? "border-themePrimary bg-accent"
+                        ? "border-b-2 border-themePrimary bg-accent"
                         : ""
                     }`}
                   >
-                    <div className="flex justify-center items-center gap-1 min-w-20">
+                    <div className="flex flex-col justify-center items-center gap-1 min-w-16">
                       {ShowIcon(tab.attributes.icon)}
                       <span className="font-medium text-xs text-center">
                         {tab.attributes.tab_name}
@@ -326,10 +223,10 @@ export default function Header({
                 }
               >
                 <NavigationMenuLink
-                  className={`${navigationMenuTriggerStyle()} border-b-2 rounded-none lg:py-8 h-full w-full bg-accent cursor-pointer`}
+                  className={`${navigationMenuTriggerStyle()} border-b-2 rounded-none lg:py-5 h-full w-full bg-accent cursor-pointer`}
                 >
-                  <div className="flex justify-center items-center gap-1 w-full">
-                    <Globe className="w-4 h-4" />
+                  <div className="flex flex-col w-12 justify-center items-center gap-1">
+                    <Globe className="text-muted-foreground h-5 w-5" />
                     <span className="font-medium text-xs text-center">
                       {currentLocale.toUpperCase()}
                     </span>

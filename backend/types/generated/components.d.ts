@@ -64,8 +64,8 @@ export interface ElementsSpeaker extends Schema.Component {
   attributes: {
     name: Attribute.String & Attribute.Required;
     title: Attribute.String;
-    bio: Attribute.Text;
     media: Attribute.Media & Attribute.Required;
+    bio: Attribute.Blocks;
   };
 }
 

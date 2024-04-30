@@ -36,7 +36,7 @@ export default async function PageRoute({
   }
 
   return (
-    <Card className="p-4 mt-4">
+    <Card className="p-4">
       <div>
         <h1 className="heading text-secondary-foreground tracking-tight underline underline-offset-2 decoration-themePrimary">
           {page.heading}
