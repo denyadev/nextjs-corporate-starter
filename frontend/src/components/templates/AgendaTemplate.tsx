@@ -72,47 +72,33 @@ function AgendaItem({
   const [isDescriptionVisible, setIsDescriptionVisible] = useState(false);
 
   const hasDescription = !!item.description;
+
   const toggleDescription = () => {
     if (hasDescription) {
       setIsDescriptionVisible(!isDescriptionVisible);
     }
   };
 
-  async function handleDownload(item: any, eventDate: any) {
-    console.log(":::", item, eventDate);
-    // const startTime = eventDate
-    //   .split("-")
-    //   .concat(item.start_time.split(":"))
-    //   .map(Number);
-    // const endTime = eventDate
-    //   .split("-")
-    //   .concat(item.end_time.split(":"))
-    //   .map(Number);
-
-    // const event = {
-    //   start: startTime,
-    //   end: endTime,
-    //   title: item.name,
-    //   description: item.notes?.join("\n") || "No details provided",
-    //   location: item.locations || "No location provided",
-    // };
-
-    // createEvent(event, (error, value) => {
-    //   if (error) {
-    //     console.error("Error creating ICS:", error);
-    //     return;
-    //   }
-
-    //   const blob = new Blob([value], { type: "text/calendar;charset=utf-8" });
-    //   const url = window.URL.createObjectURL(blob);
-    //   const a = document.createElement("a");
-    //   a.href = url;
-    //   a.download = `${item.name.replace(/[^a-zA-Z ]/g, "")}.ics`; // Remove special characters from filename
-    //   document.body.appendChild(a);
-    //   a.click();
-    //   document.body.removeChild(a);
-    //   window.URL.revokeObjectURL(url);
-    // });
+  function downloadIcs(event: any) {
+    fetch("/api/generate-ics", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ event: event, eventDate: eventDate }),
+    })
+      .then((response) => response.blob())
+      .then((blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `${event.name}.ics`;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        window.URL.revokeObjectURL(url);
+      })
+      .catch((error) => console.error("Error downloading ICS:", error));
   }
 
   return (
@@ -146,7 +132,10 @@ function AgendaItem({
       {/* Right */}
       <div className="border-l-4 space-y-2 md:space-y-0 border border-l-themePrimary w-full rounded-sm hover:bg-accent hover:border-l-themeAccent flex flex-col md:flex-row md:items-center justify-between px-4 relative">
         {/* Add to Calendar */}
-        <div className="absolute border-l right-0 text-xs text-muted-foreground gap-1 flex flex-col items-center bg-accent h-full justify-center px-1 hover:bg-themeAccent group hover:text-white cursor-pointer">
+        <div
+          onClick={() => downloadIcs(item)}
+          className="absolute border-l right-0 text-xs text-muted-foreground gap-1 flex flex-col items-center bg-accent h-full justify-center px-1 hover:bg-themeAccent group hover:text-white cursor-pointer"
+        >
           <PlusCircleIcon className="w-3.5 h-3.5 text-muted-foreground group-hover:text-white" />
         </div>
         <div className="flex items-center md:justify-center gap-4 h-full">
