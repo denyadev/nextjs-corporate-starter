@@ -34,7 +34,7 @@ export default function AgendaTemplate({ content }: { content: any }) {
 
   return (
     <div className="">
-      <div className="flex mb-4 flex-wrap gap-2">
+      <div className="grid grid-cols-4 md:flex mb-4 flex-wrap gap-2">
         {sortedContent.map((day: any, index: number) => (
           <Button
             key={index}

@@ -6,7 +6,7 @@ import { Card } from "./ui/card";
 
 export default function Marquee({ marquee }: { marquee: any }) {
   return (
-    <Card className="mb-4">
+    <Card className="mb-4 px-4">
       <MarqueeComponent className="py-4" autoFill speed={20} gradient={false}>
         {marquee.map((item: any, index: number) => (
           <div key={index}>
