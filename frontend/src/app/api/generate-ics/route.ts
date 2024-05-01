@@ -5,30 +5,35 @@ export async function POST(req: NextRequest, res: NextResponse) {
   const { event, eventDate } = await req.json();
 
   // Parse eventDate and times
-  const dateParts = eventDate.split("-").map((part: any) => parseInt(part, 10)); // [year, month, day]
+  const dateParts = eventDate
+    .split("-")
+    .map((part: string) => parseInt(part, 10)); // [year, month, day]
   const startTimeParts = event.start_time
     .split(":")
-    .map((part: any) => parseInt(part, 10)); // [hour, minute]
+    .map((part: string) => parseInt(part, 10)); // [hour, minute]
 
   // Check if end time is provided
   const endTimeParts = event.end_time
-    ? event.end_time.split(":").map((part: any) => parseInt(part, 10))
+    ? event.end_time.split(":").map((part: string) => parseInt(part, 10))
     : null; // [hour, minute]
 
   // Combine date and time parts for start
   const start = [
-    ...dateParts.slice(0, 3),
-    ...startTimeParts.slice(0, 2),
-  ] as DateTime; // [year, month, day, hour, minute]
+    dateParts[0], // year
+    dateParts[1], // month
+    dateParts[2], // day
+    startTimeParts[0], // hour
+    startTimeParts[1], // minute
+  ] as DateTime; // This is treated as a 'floating' time with no timezone conversion
 
   // Calculate duration in minutes
   let durationMinutes;
   if (endTimeParts) {
-    const startDateTime = new Date(eventDate + "T" + event.start_time + "Z"); // Assuming UTC for consistency
-    const endDateTime = new Date(eventDate + "T" + event.end_time + "Z");
+    const startDateTime = new Date(`${eventDate}T${event.start_time}`); // No timezone info, treated as floating
+    const endDateTime = new Date(`${eventDate}T${event.end_time}`);
     durationMinutes = (endDateTime.getTime() - startDateTime.getTime()) / 60000;
   } else {
-    durationMinutes = 15; // Default duration if no end time is provided
+    durationMinutes = 60; // Default duration if no end time is provided
   }
 
   const duration = {
@@ -37,14 +42,13 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
   // Convert structured text to plain text for description
   const description =
-    event?.notes
+    event.notes
       ?.map((note: any) =>
         note.children.map((item: any) => item.text).join("\n")
       )
       .join("\n") || "";
-
   const location =
-    event?.locations
+    event.locations
       ?.map((loc: any) => loc.children.map((item: any) => item.text).join(", "))
       .join("\n") || "";
 
