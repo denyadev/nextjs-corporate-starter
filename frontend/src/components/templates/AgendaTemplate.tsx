@@ -138,8 +138,8 @@ function AgendaItem({
         >
           <PlusCircleIcon className="w-3.5 h-3.5 text-muted-foreground group-hover:text-white" />
         </div>
-        <div className="flex items-center md:justify-center gap-4 h-full">
-          <div className="border-2 rounded-full w-8 h-8 text-sm items-center flex justify-center border-themePrimary">
+        <div className="flex items-center md:justify-center gap-4 h-full mr-2">
+          <div className="border-2 p-0 m-0 rounded-full min-w-8 min-h-8 text-sm items-center flex justify-center border-themePrimary">
             {index + 1}
           </div>
           <div className="">
