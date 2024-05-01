@@ -145,7 +145,7 @@ function AgendaItem({
           <div className="">
             <span className="flex-grow font-medium text-sm">{item?.name}</span>
             {item?.notes && (
-              <div className="text-muted-foreground line-clamp-1">
+              <div className="text-muted-foreground">
                 {item.notes.map((note: any, index: number) => (
                   <div key={index}>{renderContent(note)}</div>
                 ))}

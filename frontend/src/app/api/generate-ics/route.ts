@@ -3,7 +3,6 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest, res: NextResponse) {
   const { event, eventDate } = await req.json();
-  console.log("event", event, eventDate);
 
   // Parse eventDate and times
   const dateParts = eventDate.split("-").map((part: any) => parseInt(part, 10)); // [year, month, day]
@@ -29,7 +28,6 @@ export async function POST(req: NextRequest, res: NextResponse) {
   const duration = {
     minutes: durationMinutes,
   };
-  console.log(start, duration);
 
   // Convert structured text to plain text for description
   const description =
@@ -38,12 +36,11 @@ export async function POST(req: NextRequest, res: NextResponse) {
         note.children.map((item: any) => item.text).join("\n")
       )
       .join("\n") || "";
-  console.log("description", description);
+
   const location =
     event?.locations
       ?.map((loc: any) => loc.children.map((item: any) => item.text).join(", "))
       .join("\n") || "";
-  console.log("location", location);
 
   const { error, value } = createEvent({
     title: event.name,
@@ -51,6 +48,11 @@ export async function POST(req: NextRequest, res: NextResponse) {
     location,
     start,
     duration,
+    startInputType: "local",
+    productId: `dataonthespot/${event.name.replace(/[^a-z0-9]/gi, "_")}/ics`,
+    alarms: [
+      { action: "display", trigger: { minutes: 30 }, description: "Reminder" },
+    ],
   });
   if (error) {
     console.error("ICS creation failed:", error);
