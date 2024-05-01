@@ -1,23 +1,36 @@
-import { createEvent } from "ics";
+import { DateTime, createEvent } from "ics";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest, res: NextResponse) {
   const { event, eventDate } = await req.json();
 
-  const startDateTime = new Date(`${eventDate}T${event.start_time}Z`) as any; // Ensures UTC
-  const endDateTime = new Date(`${eventDate}T${event.end_time}Z`) as any; // Ensures UTC
+  // Parse eventDate and times
+  const dateParts = eventDate.split("-").map((part: any) => parseInt(part, 10)); // [year, month, day]
+  const startTimeParts = event.start_time
+    .split(":")
+    .map((part: any) => parseInt(part, 10)); // [hour, minute]
 
+  // Check if end time is provided
+  const endTimeParts = event.end_time
+    ? event.end_time.split(":").map((part: any) => parseInt(part, 10))
+    : null; // [hour, minute]
+
+  // Combine date and time parts for start
   const start = [
-    startDateTime.getUTCFullYear(),
-    startDateTime.getUTCMonth() + 1,
-    startDateTime.getUTCDate(),
-    startDateTime.getUTCHours(),
-    startDateTime.getUTCMinutes(),
-  ] as any;
+    ...dateParts.slice(0, 3),
+    ...startTimeParts.slice(0, 2),
+  ] as DateTime; // [year, month, day, hour, minute]
 
-  const durationMinutes = (endDateTime - startDateTime) / (1000 * 60);
+  // Calculate duration in minutes
+  let durationMinutes;
+  if (endTimeParts) {
+    const startDateTime = new Date(eventDate + "T" + event.start_time + "Z"); // Assuming UTC for consistency
+    const endDateTime = new Date(eventDate + "T" + event.end_time + "Z");
+    durationMinutes = (endDateTime.getTime() - startDateTime.getTime()) / 60000;
+  } else {
+    durationMinutes = 15; // Default duration if no end time is provided
+  }
 
-  // Construct duration object for ics
   const duration = {
     minutes: durationMinutes,
   };
@@ -46,11 +59,13 @@ export async function POST(req: NextRequest, res: NextResponse) {
       { action: "display", trigger: { minutes: 30 }, description: "Reminder" },
     ],
   });
+
   if (error) {
     console.error("ICS creation failed:", error);
     return new Response("Failed to create ICS file", { status: 500 });
   }
-  console.log("value", value);
+
+  console.log("ICS value", value);
   return new Response(value, {
     headers: {
       "Content-Type": "text/calendar",
