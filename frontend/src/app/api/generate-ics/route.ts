@@ -58,8 +58,8 @@ export async function POST(req: NextRequest, res: NextResponse) {
     location,
     start,
     duration,
-    startInputType: "utc",
-    startOutputType: "utc",
+    startOutputType: "local",
+    endOutputType: "local",
     productId: `dataonthespot/${event.name.replace(/[^a-z0-9]/gi, "_")}/ics`,
     alarms: [
       { action: "display", trigger: { minutes: 30 }, description: "Reminder" },
