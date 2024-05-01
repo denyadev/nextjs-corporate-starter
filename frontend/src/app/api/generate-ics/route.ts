@@ -4,25 +4,18 @@ import { NextRequest, NextResponse } from "next/server";
 export async function POST(req: NextRequest, res: NextResponse) {
   const { event, eventDate } = await req.json();
 
-  // Parse eventDate and times
-  const dateParts = eventDate.split("-").map((part: any) => parseInt(part, 10)); // [year, month, day]
-  const startTimeParts = event.start_time
-    .split(":")
-    .map((part: any) => parseInt(part, 10)); // [hour, minute, second]
-  const endTimeParts = event.end_time
-    .split(":")
-    .map((part: any) => parseInt(part, 10)); // [hour, minute, second]
+  const startDateTime = new Date(`${eventDate}T${event.start_time}Z`) as any; // Ensures UTC
+  const endDateTime = new Date(`${eventDate}T${event.end_time}Z`) as any; // Ensures UTC
 
-  // Combine date and time parts for start
   const start = [
-    ...dateParts.slice(0, 3),
-    ...startTimeParts.slice(0, 2),
-  ] as any; // [year, month, day, hour, minute]
+    startDateTime.getUTCFullYear(),
+    startDateTime.getUTCMonth() + 1,
+    startDateTime.getUTCDate(),
+    startDateTime.getUTCHours(),
+    startDateTime.getUTCMinutes(),
+  ] as any;
 
-  // Calculate duration in minutes
-  const startMinutes = startTimeParts[0] * 60 + startTimeParts[1];
-  const endMinutes = endTimeParts[0] * 60 + endTimeParts[1];
-  const durationMinutes = endMinutes - startMinutes;
+  const durationMinutes = (endDateTime - startDateTime) / (1000 * 60);
 
   // Construct duration object for ics
   const duration = {
@@ -48,7 +41,6 @@ export async function POST(req: NextRequest, res: NextResponse) {
     location,
     start,
     duration,
-    startInputType: "local",
     productId: `dataonthespot/${event.name.replace(/[^a-z0-9]/gi, "_")}/ics`,
     alarms: [
       { action: "display", trigger: { minutes: 30 }, description: "Reminder" },
