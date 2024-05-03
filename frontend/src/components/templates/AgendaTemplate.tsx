@@ -143,7 +143,7 @@ function AgendaItem({
             {index + 1}
           </div>
           <div className="">
-            <span className="flex-grow font-medium text-sm">{item?.name}</span>
+            <span className="flex-grow font-medium text-lg">{item?.name}</span>
             {item?.notes && (
               <div className="text-muted-foreground">
                 {item.notes.map((note: any, index: number) => (
