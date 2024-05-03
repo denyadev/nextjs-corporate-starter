@@ -17,7 +17,7 @@ export default function MarkdownTemplate({ content }: { content: any }) {
 }
 
 const renderText = (textNode: any) => {
-  const baseStyle = "inline text-sm";
+  const baseStyle = "inline";
   let extraStyle = "";
 
   if (textNode.bold) {
@@ -76,14 +76,14 @@ const renderContent = (note: any) => {
 
     case "heading":
       const headingSizes: { [key: number]: string } = {
-        1: "text-3xl",
-        2: "text-2xl",
-        3: "text-xl",
-        4: "text-lg",
-        5: "text-md",
-        6: "text-sm",
+        1: "text-4xl",
+        2: "text-3xl",
+        3: "text-2xl",
+        4: "text-xl",
+        5: "text-lg",
+        6: "text-2xl text-center",
       };
-      const headingSize = headingSizes[note.level] + " font-bold mb-2";
+      const headingSize = headingSizes[note.level] + " mb-2";
       return <div className={headingSize}>{note.children.map(renderText)}</div>;
 
     case "quote":
