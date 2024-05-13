@@ -28,7 +28,7 @@ export const renderContent = (note: any) => {
   switch (note.type) {
     case "paragraph":
       return (
-        <p className="mb-2">
+        <p className="my-4">
           {note.children.map((child: any, index: number) =>
             child.type === "text" ? (
               renderText(child)
@@ -61,12 +61,12 @@ export const renderContent = (note: any) => {
 
     case "heading":
       const headingSizes: { [key: number]: string } = {
-        1: "text-4xl",
-        2: "text-3xl",
-        3: "text-2xl",
-        4: "text-xl",
-        5: "text-lg",
-        6: "text-2xl text-center",
+        1: "text-3xl",
+        2: "text-2xl",
+        3: "text-xl",
+        4: "text-lg",
+        5: "text-base",
+        6: "text-xl text-center",
       };
       const headingSize = headingSizes[note.level] + " mb-2";
       return <div className={headingSize}>{note.children.map(renderText)}</div>;
