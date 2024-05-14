@@ -61,12 +61,12 @@ export const renderContent = (note: any) => {
 
     case "heading":
       const headingSizes: { [key: number]: string } = {
-        1: "text-3xl",
-        2: "text-2xl",
-        3: "text-xl",
-        4: "text-lg",
-        5: "text-base",
-        6: "text-xl text-center",
+        1: "text-2xl",
+        2: "text-xl",
+        3: "text-lg",
+        4: "text-base",
+        5: "text-2xl text-center",
+        6: "text-base text-center",
       };
       const headingSize = headingSizes[note.level] + " mb-2";
       return <div className={headingSize}>{note.children.map(renderText)}</div>;
