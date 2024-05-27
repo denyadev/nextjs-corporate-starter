@@ -106,7 +106,7 @@ export default async function MainLayout({
       >
         <ThemeProvider theme={themeData}>
           {/* {bannerData?.data && <Banner banner={bannerData} />} */}{" "}
-          <div className="relative w-full h-full">
+          <div className="relative w-full h-full z-50">
             <FloatingNav
               navItems={transformedTabs}
               localization={localizationData}
