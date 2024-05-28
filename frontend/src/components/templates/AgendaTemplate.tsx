@@ -191,7 +191,7 @@ function AgendaItem({
                           <div>
                             <Badge
                               variant="secondary"
-                              className="gap-2 text-xs hover:border-l-4 hover:border-themePrimary font-normal"
+                              className="gap-2 text-xs hover:border-l-4 hover:border-themePrimary font-normal w-full"
                             >
                               <MapPinned className="flex-shrink-0 w-4 h-4 text-themePrimary" />
                               {locationItem.text}
@@ -205,7 +205,7 @@ function AgendaItem({
               ))}
           </div>
 
-          <div className="flex flex-col md:flex-row gap-1">
+          <div className="flex flex-col gap-1">
             {item.media?.data?.map((fileWrapper: any, index: number) => {
               const file = fileWrapper.attributes;
               let iconPath;
