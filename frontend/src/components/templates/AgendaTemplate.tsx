@@ -179,7 +179,7 @@ function AgendaItem({
                 </ul>
               ))}
           </div>
-          <div className="flex flex-col md:flex-row md:gap-1 w-full">
+          <div className="flex flex-col md:flex-row md:gap-1">
             {item.locations &&
               item.locations.map((locationList: any, listIndex: number) => (
                 <ul key={listIndex} className="flex">
@@ -191,7 +191,7 @@ function AgendaItem({
                           <div>
                             <Badge
                               variant="secondary"
-                              className="gap-2 text-xs hover:border-l-4 hover:border-themePrimary font-normal w-full"
+                              className="gap-2 text-xs hover:border-l-4 hover:border-themePrimary font-normal min-w-max"
                             >
                               <MapPinned className="flex-shrink-0 w-4 h-4 text-themePrimary" />
                               {locationItem.text}
