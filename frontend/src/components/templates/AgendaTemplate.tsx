@@ -179,7 +179,7 @@ function AgendaItem({
                 </ul>
               ))}
           </div>
-          <div className="flex flex-col md:flex-row md:gap-1">
+          <div className="flex flex-col md:flex-row md:gap-1 w-full">
             {item.locations &&
               item.locations.map((locationList: any, listIndex: number) => (
                 <ul key={listIndex} className="flex">
@@ -205,7 +205,7 @@ function AgendaItem({
               ))}
           </div>
 
-          <div className="flex flex-col gap-1">
+          <div className="flex flex-col">
             {item.media?.data?.map((fileWrapper: any, index: number) => {
               const file = fileWrapper.attributes;
               let iconPath;
