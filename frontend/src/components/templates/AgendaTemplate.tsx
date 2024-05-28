@@ -191,7 +191,7 @@ function AgendaItem({
                           <div>
                             <Badge
                               variant="secondary"
-                              className="gap-2 text-xs hover:border-l-4 hover:border-themePrimary font-normal min-w-max"
+                              className="gap-2 text-xs hover:border-l-4 hover:border-themePrimary font-normal"
                             >
                               <MapPinned className="flex-shrink-0 w-4 h-4 text-themePrimary" />
                               {locationItem.text}
