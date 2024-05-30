@@ -11,16 +11,16 @@ export function middleware(request: NextRequest) {
 
   // Check if the pathname matches the pattern /[slug]
   const slugPattern = /^\/([^\/]+)$/;
-  if (slugPattern.test(pathname)) {
+  const match = pathname.match(slugPattern);
+  if (match) {
     // Redirect to /[slug]/agenda
-    const slug = pathname.match(slugPattern)[1];
+    const slug = match[1];
     return NextResponse.redirect(new URL(`/${slug}/agenda`, request.url));
   }
 
   // Return the i18n response if no redirection is needed
   return response;
 }
-
 export const config = {
   matcher: "/((?!api|static|.*\\..*|_next).*)",
 };
