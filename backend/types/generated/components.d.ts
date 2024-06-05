@@ -166,6 +166,17 @@ export interface TemplateSponsors extends Schema.Component {
   };
 }
 
+export interface TemplateZoom extends Schema.Component {
+  collectionName: 'components_template_zooms';
+  info: {
+    displayName: 'Zoom';
+    icon: 'cast';
+  };
+  attributes: {
+    meetingnumber: Attribute.String;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface Components {
@@ -182,6 +193,7 @@ declare module '@strapi/types' {
       'template.marquee': TemplateMarquee;
       'template.speaker': TemplateSpeaker;
       'template.sponsors': TemplateSponsors;
+      'template.zoom': TemplateZoom;
     }
   }
 }

@@ -5,6 +5,7 @@ import GalleryTemplate from "../components/templates/GalleryTemplate";
 import SpeakersTemplate from "../components/templates/SpeakersTemplate";
 import SponsorsTemplate from "../components/templates/SponsorsTemplate";
 import MarkdownTemplate from "@/components/templates/MarkdownTemplate";
+import ZoomTemplate from "@/components/templates/ZoomTemplate";
 
 export const templateRenderer = (page: any) => {
   const { template } = page;
@@ -34,6 +35,8 @@ export const templateRenderer = (page: any) => {
                 return <GalleryTemplate content={templateItem} />;
               case "template.markdown":
                 return <MarkdownTemplate content={templateItem} />;
+              case "template.zoom":
+                return <ZoomTemplate content={templateItem} />;
               default:
                 return <div>Unknown template type</div>;
             }

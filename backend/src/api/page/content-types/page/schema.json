@@ -53,7 +53,8 @@
         "template.sponsors",
         "template.documents",
         "template.gallery",
-        "template.markdown"
+        "template.markdown",
+        "template.zoom"
       ]
     },
     "tab_name": {

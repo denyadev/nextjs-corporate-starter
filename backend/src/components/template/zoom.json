@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_template_zooms",
+  "info": {
+    "displayName": "Zoom",
+    "icon": "cast"
+  },
+  "options": {},
+  "attributes": {
+    "meetingnumber": {
+      "type": "string"
+    }
+  }
+}

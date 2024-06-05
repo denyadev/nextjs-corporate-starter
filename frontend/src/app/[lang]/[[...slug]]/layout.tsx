@@ -8,6 +8,7 @@ import { getStrapiURL } from "@/utils/api-helpers";
 import Error from "@/components/Error";
 import { cookies } from "next/headers";
 import { FloatingNav } from "@/components/ui/floating-navbar";
+import { MeetingProvider } from "@/context/MeetingContext";
 
 export const dynamic = "force-dynamic";
 
@@ -105,38 +106,40 @@ export default async function MainLayout({
         resources={resources}
       >
         <ThemeProvider theme={themeData}>
-          {/* {bannerData?.data && <Banner banner={bannerData} />} */}{" "}
-          <div className="relative w-full h-full z-50">
-            <FloatingNav
-              navItems={transformedTabs}
+          <MeetingProvider>
+            {/* {bannerData?.data && <Banner banner={bannerData} />} */}{" "}
+            <div className="relative w-full h-full z-50">
+              <FloatingNav
+                navItems={transformedTabs}
+                localization={localizationData}
+                bannerData={bannerData}
+              />
+            </div>
+            <Header
+              logo={logoData}
+              slug={slug[0]}
+              tabs={pagesData}
               localization={localizationData}
-              bannerData={bannerData}
             />
-          </div>
-          <Header
-            logo={logoData}
-            slug={slug[0]}
-            tabs={pagesData}
-            localization={localizationData}
-          />
-          <div className="container mx-auto px-4 mb-16 md:mb-4 lg:px-0">
-            {slug.length > 0 && bannerData?.data && (
-              <Banner banner={bannerData} />
-            )}
+            <div className="container mx-auto px-4 mb-16 md:mb-4 lg:px-0">
+              {slug.length > 0 && bannerData?.data && (
+                <Banner banner={bannerData} />
+              )}
 
-            {marqueeData && marqueeData.length > 0 && (
-              <Marquee marquee={marqueeData} />
-            )}
-            {slug.length === 1 && data?.data[0] && (
-              <div className="mt-4">
-                <h1 className="heading text-6xl">
-                  Welcome to the{" "}
-                  <span className="text-themePrimary">{orgName}</span>.
-                </h1>
-              </div>
-            )}
-            {children}
-          </div>
+              {marqueeData && marqueeData.length > 0 && (
+                <Marquee marquee={marqueeData} />
+              )}
+              {slug.length === 1 && data?.data[0] && (
+                <div className="mt-4">
+                  <h1 className="heading text-6xl">
+                    Welcome to the{" "}
+                    <span className="text-themePrimary">{orgName}</span>.
+                  </h1>
+                </div>
+              )}
+              {children}
+            </div>{" "}
+          </MeetingProvider>
         </ThemeProvider>
       </TranslationsProvider>
     </section>
