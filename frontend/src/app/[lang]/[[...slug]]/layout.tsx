@@ -125,7 +125,6 @@ export default async function MainLayout({
               {slug.length > 0 && bannerData?.data && (
                 <Banner banner={bannerData} />
               )}
-
               {marqueeData && marqueeData.length > 0 && (
                 <Marquee marquee={marqueeData} />
               )}
@@ -138,7 +137,7 @@ export default async function MainLayout({
                 </div>
               )}
               {children}
-            </div>{" "}
+            </div>
           </MeetingProvider>
         </ThemeProvider>
       </TranslationsProvider>

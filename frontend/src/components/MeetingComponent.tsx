@@ -5,11 +5,13 @@ import { useState, useEffect } from "react";
 import { Input } from "./ui/input";
 import { Button } from "@/components/ui/button";
 import { useMeeting } from "@/context/MeetingContext";
+import ZoomPortal from "./ZoomPortal";
 import { generateSignature } from "@/lib/generateSignature";
 
 const MeetingComponent = ({ meetingNumber }: { meetingNumber: string }) => {
   const [name, setName] = useState("");
   const { isConnected, joinMeeting } = useMeeting();
+  const [activeTab, setActiveTab] = useState("vote");
 
   useEffect(() => {
     if (isConnected) {
@@ -25,7 +27,6 @@ const MeetingComponent = ({ meetingNumber }: { meetingNumber: string }) => {
               language: "en-US",
               zoomAppRoot: meetingSDKElement,
             });
-
             client.join({
               sdkKey: process.env.NEXT_PUBLIC_ZOOM_CLIENT_ID,
               signature: signature,
@@ -62,7 +63,15 @@ const MeetingComponent = ({ meetingNumber }: { meetingNumber: string }) => {
         </div>
       )}
 
-      {isConnected && <div className="relative" id="meetingSDKElement"></div>}
+      {isConnected && (
+        <div>
+          <div>
+            <button onClick={() => setActiveTab("vote")}>Vote</button>
+            <button onClick={() => setActiveTab("other")}>Other Tab</button>
+          </div>
+          <ZoomPortal showVideo={activeTab === "vote"} />
+        </div>
+      )}
     </div>
   );
 };
