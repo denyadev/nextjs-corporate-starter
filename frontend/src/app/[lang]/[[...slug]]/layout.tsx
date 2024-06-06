@@ -8,7 +8,7 @@ import { getStrapiURL } from "@/utils/api-helpers";
 import Error from "@/components/Error";
 import { cookies } from "next/headers";
 import { FloatingNav } from "@/components/ui/floating-navbar";
-import { MeetingProvider } from "@/context/MeetingContext";
+import { ZoomProvider } from "@/context/ZoomContext";
 
 export const dynamic = "force-dynamic";
 
@@ -43,7 +43,6 @@ export default async function MainLayout({
   const bannerData = data?.data[0]?.attributes?.banner;
   const logoData = data?.data[0]?.attributes?.logo;
   const pagesData = data?.data[0]?.attributes?.pages?.data || [];
-  // console.log(pagesData);
   const marqueeData = data?.data[0]?.attributes?.marquee;
   const localizationData = data?.data[0]?.attributes?.localizations;
   const themeData = {
@@ -106,39 +105,37 @@ export default async function MainLayout({
         resources={resources}
       >
         <ThemeProvider theme={themeData}>
-          <MeetingProvider>
-            {/* {bannerData?.data && <Banner banner={bannerData} />} */}{" "}
-            <div className="relative w-full h-full z-50">
-              <FloatingNav
-                navItems={transformedTabs}
-                localization={localizationData}
-                bannerData={bannerData}
-              />
-            </div>
-            <Header
-              logo={logoData}
-              slug={slug[0]}
-              tabs={pagesData}
+          {/* {bannerData?.data && <Banner banner={bannerData} />} */}{" "}
+          <div className="relative w-full h-full z-50">
+            <FloatingNav
+              navItems={transformedTabs}
               localization={localizationData}
+              bannerData={bannerData}
             />
-            <div className="container mx-auto px-4 mb-16 md:mb-4 lg:px-0">
-              {slug.length > 0 && bannerData?.data && (
-                <Banner banner={bannerData} />
-              )}
-              {marqueeData && marqueeData.length > 0 && (
-                <Marquee marquee={marqueeData} />
-              )}
-              {slug.length === 1 && data?.data[0] && (
-                <div className="mt-4">
-                  <h1 className="heading text-6xl">
-                    Welcome to the{" "}
-                    <span className="text-themePrimary">{orgName}</span>.
-                  </h1>
-                </div>
-              )}
-              {children}
-            </div>
-          </MeetingProvider>
+          </div>
+          <Header
+            logo={logoData}
+            slug={slug[0]}
+            tabs={pagesData}
+            localization={localizationData}
+          />
+          <div className="container mx-auto px-4 mb-16 md:mb-4 lg:px-0">
+            {slug.length > 0 && bannerData?.data && (
+              <Banner banner={bannerData} />
+            )}
+            {marqueeData && marqueeData.length > 0 && (
+              <Marquee marquee={marqueeData} />
+            )}
+            {slug.length === 1 && data?.data[0] && (
+              <div className="mt-4">
+                <h1 className="heading text-6xl">
+                  Welcome to the{" "}
+                  <span className="text-themePrimary">{orgName}</span>.
+                </h1>
+              </div>
+            )}
+            {children}
+          </div>
         </ThemeProvider>
       </TranslationsProvider>
     </section>

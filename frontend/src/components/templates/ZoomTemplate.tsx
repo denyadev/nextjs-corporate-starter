@@ -1,13 +1,13 @@
 "use client";
+import { useEffect } from "react";
+import Meeting from "../MeetingComponent";
+import { useZoom } from "@/context/ZoomContext";
 
-import MeetingComponent from "../MeetingComponent";
+export default function ZoomPage() {
+  const { setMeetingNumber } = useZoom();
+  useEffect(() => {
+    setMeetingNumber("86322258133");
+  }, [setMeetingNumber]);
 
-export default function ZoomTemplate({ content }: { content: any }) {
-  return (
-    <section className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
-      <div className="grid auto-rows-max items-start gap-4 md:gap-8 lg:col-span-2">
-        <MeetingComponent meetingNumber={content.meetingnumber} />
-      </div>
-    </section>
-  );
+  return <Meeting />;
 }

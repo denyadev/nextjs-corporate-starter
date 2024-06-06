@@ -1,81 +1,38 @@
-// MeetingComponent.tsx
 "use client";
 
-import { useState, useEffect } from "react";
-import { Input } from "./ui/input";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { useMeeting } from "@/context/MeetingContext";
-import ZoomPortal from "./ZoomPortal";
-import { generateSignature } from "@/lib/generateSignature";
+import { Input } from "@/components/ui/input";
+import { useZoom } from "@/context/ZoomContext";
 
-const MeetingComponent = ({ meetingNumber }: { meetingNumber: string }) => {
-  const [name, setName] = useState("");
-  const { isConnected, joinMeeting } = useMeeting();
-  const [activeTab, setActiveTab] = useState("vote");
+const Meeting: React.FC = () => {
+  const { initializeZoom, zoomContainerRef, isInitialized } = useZoom();
+  const [userName, setUserName] = useState<string>("");
 
-  useEffect(() => {
-    if (isConnected) {
-      const initializeZoom = async () => {
-        try {
-          const ZoomEmbed = (await import("@zoomus/websdk/embedded")).default;
-          const client = ZoomEmbed.createClient();
-          const signature = generateSignature(meetingNumber);
-          let meetingSDKElement = document.getElementById("meetingSDKElement");
-
-          if (meetingSDKElement) {
-            client.init({
-              language: "en-US",
-              zoomAppRoot: meetingSDKElement,
-            });
-            client.join({
-              sdkKey: process.env.NEXT_PUBLIC_ZOOM_CLIENT_ID,
-              signature: signature,
-              meetingNumber,
-              userName: name,
-            });
-          } else {
-            console.error("meetingSDKElement not found");
-          }
-        } catch (error) {
-          console.error("Error during Zoom meeting initialization:", error);
-        }
-      };
-
-      initializeZoom();
+  const handleJoinClick = () => {
+    if (!isInitialized && userName) {
+      initializeZoom("86322258133", userName);
     }
-  }, [isConnected, meetingNumber, name]);
+  };
 
   return (
-    <div className="relative p-0 m-0 w-full max-w-screen flex flex-col justify-center">
-      {!isConnected && (
-        <div className="flex gap-2 max-w-sm">
-          <Input
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            placeholder="Enter your name"
-          />
-          <Button
-            onClick={() => joinMeeting(meetingNumber, name)}
-            variant="outline"
-          >
-            Join Meeting
-          </Button>
-        </div>
-      )}
-
-      {isConnected && (
-        <div>
-          <div>
-            <button onClick={() => setActiveTab("vote")}>Vote</button>
-            <button onClick={() => setActiveTab("other")}>Other Tab</button>
-          </div>
-          <ZoomPortal showVideo={activeTab === "vote"} />
-        </div>
-      )}
+    <div className="relative p-0 m-0 w-full max-w-screen flex flex-col items-center justify-center">
+      <Button>Zoom</Button>
+      <div className="flex gap-2">
+        <Input
+          placeholder="Name"
+          value={userName}
+          onChange={(e) => setUserName(e.target.value)}
+        />
+        <Button onClick={handleJoinClick} variant="outline">
+          Join Meeting
+        </Button>
+      </div>
+      <div ref={zoomContainerRef} id="meetingSDKElement"></div>
     </div>
   );
 };
 
-MeetingComponent.displayName = "Zoom Component View";
+Meeting.displayName = "Zoom Component View";
 
-export default MeetingComponent;
+export default Meeting;

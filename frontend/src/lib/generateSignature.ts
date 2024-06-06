@@ -1,7 +1,6 @@
 const KJUR = require("jsrsasign");
-// https://www.npmjs.com/package/jsrsasign
 
-export function generateSignature(meetingNumber: string) {
+export function generateSignature(meetingNumber: string): string {
   const iat = Math.round(new Date().getTime() / 1000) - 30;
   const exp = iat + 60 * 60 * 2;
   const oHeader = { alg: "HS256", typ: "JWT" };
