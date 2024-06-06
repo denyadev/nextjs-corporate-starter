@@ -36,7 +36,7 @@ export const templateRenderer = (page: any) => {
               case "template.markdown":
                 return <MarkdownTemplate content={templateItem} />;
               case "template.zoom":
-                return <ZoomTemplate content={templateItem} />;
+                return null;
               default:
                 return <div>Unknown template type</div>;
             }
