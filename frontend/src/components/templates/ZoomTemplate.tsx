@@ -6,7 +6,7 @@ import { useZoom } from "@/context/ZoomContext";
 export default function ZoomPage() {
   const { setMeetingNumber } = useZoom();
   useEffect(() => {
-    setMeetingNumber("86322258133");
+    setMeetingNumber("82445108777");
   }, [setMeetingNumber]);
 
   return <Meeting />;

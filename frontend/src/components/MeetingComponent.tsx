@@ -46,7 +46,7 @@ const Meeting: React.FC = () => {
   const { zoomContainerRef, setMeetingNumber } = useZoom();
 
   useEffect(() => {
-    setMeetingNumber("86322258133");
+    setMeetingNumber("82445108777");
   }, [setMeetingNumber]);
   return (
     <div className="relative p-0 m-0 w-full max-w-screen flex flex-col items-center justify-center">
