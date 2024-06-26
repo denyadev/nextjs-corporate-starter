@@ -29,9 +29,9 @@ export default async function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="absolute top-40 z-50">
+          {/* <div className="absolute top-40 z-50">
             <Meeting />
-          </div>
+          </div> */}
           {children}
           <Analytics />
         </GlobalThemeProvider>
