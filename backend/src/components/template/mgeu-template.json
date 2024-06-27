@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_template_mgeu_templates",
+  "info": {
+    "displayName": "MGEU Template",
+    "icon": "bell"
+  },
+  "options": {},
+  "attributes": {
+    "video": {
+      "type": "string"
+    },
+    "formsite": {
+      "type": "string"
+    }
+  }
+}

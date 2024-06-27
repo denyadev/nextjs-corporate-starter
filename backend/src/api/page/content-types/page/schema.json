@@ -54,7 +54,8 @@
         "template.documents",
         "template.gallery",
         "template.markdown",
-        "template.zoom"
+        "template.zoom",
+        "template.mgeu-template"
       ]
     },
     "tab_name": {

@@ -507,7 +507,8 @@ export interface ApiPagePage extends Schema.CollectionType {
         'template.documents',
         'template.gallery',
         'template.markdown',
-        'template.zoom'
+        'template.zoom',
+        'template.mgeu-template'
       ]
     > &
       Attribute.SetPluginOptions<{

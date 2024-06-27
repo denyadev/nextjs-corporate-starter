@@ -6,6 +6,7 @@ import SpeakersTemplate from "../components/templates/SpeakersTemplate";
 import SponsorsTemplate from "../components/templates/SponsorsTemplate";
 import MarkdownTemplate from "@/components/templates/MarkdownTemplate";
 import ZoomTemplate from "@/components/templates/ZoomTemplate";
+import MGEUTemplate from "@/components/templates/MGEUTemplate";
 
 export const templateRenderer = (page: any) => {
   const { template } = page;
@@ -35,6 +36,8 @@ export const templateRenderer = (page: any) => {
                 return <GalleryTemplate content={templateItem} />;
               case "template.markdown":
                 return <MarkdownTemplate content={templateItem} />;
+              case "template.mgeu-template":
+                return <MGEUTemplate content={templateItem} />;
               case "template.zoom":
                 return null;
               default:

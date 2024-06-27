@@ -143,6 +143,18 @@ export interface TemplateMarquee extends Schema.Component {
   };
 }
 
+export interface TemplateMgeuTemplate extends Schema.Component {
+  collectionName: 'components_template_mgeu_templates';
+  info: {
+    displayName: 'MGEU Template';
+    icon: 'bell';
+  };
+  attributes: {
+    video: Attribute.String;
+    formsite: Attribute.String;
+  };
+}
+
 export interface TemplateSpeaker extends Schema.Component {
   collectionName: 'components_template_speakers';
   info: {
@@ -191,6 +203,7 @@ declare module '@strapi/types' {
       'template.gallery': TemplateGallery;
       'template.markdown': TemplateMarkdown;
       'template.marquee': TemplateMarquee;
+      'template.mgeu-template': TemplateMgeuTemplate;
       'template.speaker': TemplateSpeaker;
       'template.sponsors': TemplateSponsors;
       'template.zoom': TemplateZoom;
