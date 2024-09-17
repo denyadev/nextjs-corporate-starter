@@ -9,9 +9,16 @@ export function middleware(request: NextRequest) {
   // Extract the URL pathname
   const { pathname } = request.nextUrl;
 
+   // Custom redirect for /yourname*
+   if (pathname.startsWith('/yourname')) {
+    return NextResponse.redirect('https://www.dotsvote.com/dots/demo');
+  }
+
   // Check if the pathname matches the pattern /[slug] or /fr/[slug]
   const slugPattern = /^\/(fr\/)?([^\/]+)$/;
   const match = pathname.match(slugPattern);
+
+  if ()
 
   if (match) {
     // Redirect to /[slug]/agenda or /fr/[slug]/agenda
